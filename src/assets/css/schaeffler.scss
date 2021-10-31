@@ -1,0 +1,168 @@
+// Primary & Secondary Colors
+$green1: #00893d; // schaeffler-green
+$green2: #005f14; // dark-green
+
+// Popular Colors
+$gray10: #666a6c; // Text & Icons
+$gray3: #dee4e7; // Background
+
+// Grays for text
+$black: #000; // .black
+$gray11: #54595b; // headline
+$gray6: #a9b1b6; // color for labels
+
+// Grays for backgrounds
+$gray3: #dee4e7;
+$gray2: #e8eef1;
+$gray1: #f4f8fa;
+$white: #fff;
+
+// Further grays
+$gray4: #cdd3d6;
+$gray5: #b8c0c5;
+$gray: #878d90;
+$gray9: #777d7f;
+$gray12: #404547;
+$gray13: #2d3032;
+
+// Toasts & Notifications
+$red: #aa0a05; // Error red
+$yellow: #fac832; // Warnng yellow
+$success-green: $green1; // success green
+$gray7: #9ca3a6; // notification
+
+%font-family {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+%h1 {
+  @extend %font-family;
+
+  font-size: 36px;
+  color: $green1;
+}
+
+%h2 {
+  @extend %font-family;
+
+  font-size: 22px;
+}
+
+%h3 {
+  @extend %font-family;
+
+  font-size: 20px;
+}
+
+%h4 {
+  @extend %font-family;
+
+  font-size: 17px;
+  font-weight: bold;
+}
+
+%h5 {
+  @extend %font-family;
+
+  font-size: 15px;
+  font-weight: bold;
+}
+
+%h6 {
+  @extend %font-family;
+
+  font-size: 13px;
+  font-weight: bold;
+}
+
+%text {
+  @extend %font-family;
+
+  font-size: 15px;
+}
+
+%text-labels {
+  @extend %font-family;
+
+  font-size: 12px;
+}
+
+%text-small {
+  @extend %font-family;
+
+  font-size: 11px;
+}
+
+%text-mini {
+  @extend %font-family;
+
+  font-size: 10px;
+}
+
+.s-primary-button {
+  background: $green1;
+  color: $white;
+  text-transform: uppercase;
+
+  @extend %h5;
+
+  &:hover {
+    background: $green2;
+  }
+}
+
+.s-secondary-button {
+  background: $gray7;
+  color: $white;
+  text-transform: uppercase;
+
+  @extend %h5;
+
+  &:hover {
+    background: $gray9;
+  }
+}
+
+.s-inactive-button {
+  background: $gray1;
+  color: $gray10;
+  border: $gray4;
+  text-transform: uppercase;
+
+  @extend %h5;
+}
+
+// text buttons
+.s-primary-text-button {
+  color: $green1;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  @extend %h5;
+
+  &:hover {
+    color: $green2;
+  }
+
+  &:disabled {
+    color: $green2;
+    opacity: 0.5;
+  }
+}
+
+.s-secondary-text-button {
+  color: $gray7;
+  text-transform: uppercase;
+
+  @extend %h5;
+
+  &:hover {
+    color: $gray9;
+    font-weight: bold;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    font-weight: bold;
+  }
+}

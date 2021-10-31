@@ -1,0 +1,69 @@
+::ng-deep .watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+
+  p {
+    width: 200%;
+    color: rgba(209, 209, 209, 0.2);
+    //color: red;
+    text-align: left;
+    font-size: 0.8rem;
+    overflow: hidden;
+    margin: 40px 0;
+    padding: 0;
+    transform: rotate(6deg);
+  }
+}
+
+::ng-deep #viewerContainer {
+  z-index: 10;
+  top: 0 !important;
+}
+
+::ng-deep .toolbar {
+  display: none !important;
+}
+
+app-image-detail {
+  .image-container {
+    width: 100%;
+    max-width: 100%;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .comment-box::before {
+    border: 0 !important;
+  }
+
+  .comment-detail {
+    padding: 8px 4px;
+    text-align: left;
+
+    p {
+      margin: 0;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      position: relative;
+
+      .comment-status {
+        font-size: 0.8rem;
+        color: #666a6c;
+      }
+
+      .comment-delete {
+        position: absolute;
+        color: #aa0a05;
+        right: 0;
+      }
+    }
+  }
+}

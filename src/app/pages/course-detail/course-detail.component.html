@@ -1,0 +1,59 @@
+<div>
+  <div class="weui-cells__title">课程信息 / Program Info</div>
+  <div class="weui-cells">
+    <div class="weui-form-preview">
+      <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">课程名称 / Program Name</label>
+        </div>
+<!--      </div>-->
+<!--      <div class="weui-form-preview__bd">-->
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label" style="color: #1d1d1d">{{course.title}} / {{course.titleEn}}</label>
+        </div>
+      </div>
+      <div class="weui-form-preview__bd" style="padding-top: 0;">
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">课程内容/Program Introduction</label>
+          <span class="weui-form-preview__value">
+            <weui-button (click)="onProgramDetail(course)" [weui-mini]="true" style="font-size: 14px;">详情/Detail</weui-button>
+          </span>
+        </div>
+      </div>
+      <div class="weui-form-preview__ft">
+        <a *ngIf="course.userApplyStatus==='NONE'" class="weui-form-preview__btn weui-form-preview__btn_primary"
+           (click)="onApplyConfirm()">
+          报名 / Apply
+          <p style="font-size: 12px;margin: auto;line-height: 20px;width: 80%;text-align: center;padding-bottom: 10px;">
+            如您是审批经理，请忽略此按钮/Approval Manager kindly ignore this button
+          </p>
+        </a>
+        <a *ngIf="course.userApplyStatus!=='NONE'" class="weui-form-preview__btn weui-form-preview__btn_default"
+        >{{generateStatus(course.userApplyStatus)}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="applicantsBySuperior.length>0">
+  <div class="weui-cells__title">报名列表/Application List</div>
+  <div class="weui-cells">
+    <div class="weui-cell" *ngFor="let applicant of applicantsBySuperior">
+      <div class="weui-cell__bd">
+        {{applicant.totalName}}
+      </div>
+      <div class="weui-cell__ft" *ngIf="'PENDING'===applicant.status"
+           (click)="onDetail(applicant)">
+        <button weui-button weui-type="default" weui-mini="mini">{{applicant.status}}</button>
+      </div>
+      <div class="weui-cell__ft" *ngIf="'PENDING'!==applicant.status">
+        <!--        <button weui-button weui-type="default" weui-mini="mini">{{applicant.status}}</button>-->
+        {{generateStatus(applicant.status)}}
+      </div>
+    </div>
+  </div>
+</div>
+<weui-toast #success text="报名成功"></weui-toast>
+<weui-toast #failed text="报名失败"></weui-toast>
+<weui-dialog #ios [config]="config" class="course-detail-dialog"></weui-dialog>
+

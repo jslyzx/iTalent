@@ -1,0 +1,33 @@
+<div class="main">
+    <div class="ope clearfix">
+        <span class="cancel fl">取消</span>
+        <button class="post">发布</button>
+        <button class="draft">草稿</button>
+    </div>
+    <input type="text" class="title" placeholder="标题">
+    <textarea class="content" id="content" placeholder="输入要发的内容（最多输入1万字）"></textarea>
+    <div class="s-b clearfix">
+        <i class="iconfont icon-tupian"></i>
+        <i class="iconfont icon-biaoqing"></i>
+        <i class="iconfont icon-fujian"></i>
+        <!-- <mt-checklist v-model="checked" :options="['设置封面图']" class="fr">
+        </mt-checklist> -->
+        <!-- 样式处理一下 -->
+        <div class="weui-cells weui-cells_checkbox">
+            <label class="weui-cell weui-check__label" for="checkbox">
+                <div class="weui-cell__hd">
+                    <input type="checkbox" class="weui-check" name="setCover" [weui-value]="1" id="checkbox" />
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>设置封面图</p>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="clearfix">
+        <i class="iconfont icon-at fl" style="color: #646464;"></i>
+        <span class="fl" style="margin-left: 20px;color: #646464;">提醒谁看</span>
+        <a href="javascript:;" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
+    </div>
+</div>

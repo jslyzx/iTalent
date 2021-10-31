@@ -1,0 +1,20 @@
+{
+  "TITLE": "才赋帮",
+  "RECENT": "最新文件",
+  "MORE": "更多",
+  "CATEGORY": "文件类别",
+  "DOCUMENT": {
+    "FILTER": "筛选条件",
+    "DATE": "日期",
+    "YESTERDAY": "昨天",
+    "LAST7DAYS": "过去7天",
+    "LAST30DAYS": "过去30天",
+    "CATEGORY": "类别"
+  },
+  "FEEDBACK": {
+    "CATEGORY": "反馈类型",
+    "CONTENT": "我要反馈",
+    "CANCEL": "取消",
+    "SUBMIT": "提交"
+  }
+}

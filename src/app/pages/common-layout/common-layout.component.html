@@ -1,0 +1,9 @@
+<router-outlet></router-outlet>
+<!--将对话框组件放在底部-->
+<weui-toast #success></weui-toast>
+<weui-toast #loading [type]="'loading'"></weui-toast>
+<weui-toast #asyncLoading [time]="0" [type]="'loading'"></weui-toast>
+<weui-toast #error [text]="errorMsg" [time]="0" [type]="'loading'"></weui-toast>
+
+<!--将对话框组件放在底部-->
+<weui-toptips #toptips [text]="text" [type]="type"></weui-toptips>

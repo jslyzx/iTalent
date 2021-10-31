@@ -1,0 +1,42 @@
+<div id="app">
+    <div class="banner">
+        <weui-swiper [options]="{ effect: 'fade', spaceBetween: 30, autoplay: 2000 }">
+            <div class="swiper-container">
+                <!-- 容器（必选） -->
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let i of images">
+                        <img src="{{ i }}" />
+                    </div>
+                </div>
+                <!-- 分页（可选） -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </weui-swiper>
+    </div>
+    <div class="navbar clearfix">
+        <div *ngFor="let tag of tags; let i = index" class="nav" [ngClass]="{'active': i === selected}" (click)="changeTag(i)">{{tag.tagName}}</div>
+    </div>
+    <div class="content clearfix">
+        <div class="item" *ngFor="let channel of channels">
+            <img src="./assets/images/my-banner.jpg" alt="">
+            <div class="front">
+                <i class="iconfont icon-ruanjian"></i>
+                <span class="title">{{channel.sectionName}}</span>
+            </div>
+        </div>
+    </div>
+    <nav class="mui-bar mui-bar-tab" style="z-index: 999">
+        <a class="mui-tab-item active" href="index.html">
+            <i class="iconfont icon-shouye"></i>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a class="mui-tab-item" href="message.html">
+            <i class="iconfont icon-xiaoxin"></i>
+            <span class="mui-tab-label">消息</span>
+        </a>
+        <a class="mui-tab-item " href="home.html">
+            <i class="iconfont icon-woden"></i>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+</div>

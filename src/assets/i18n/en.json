@@ -1,0 +1,20 @@
+{
+  "TITLE": "iTalent",
+  "RECENT": "Latest updates",
+  "MORE": "More",
+  "CATEGORY": "Category",
+  "DOCUMENT": {
+    "FILTER": "Filter",
+    "DATE": "Date",
+    "YESTERDAY": "Yesterday",
+    "LAST7DAYS": "Last 7 days",
+    "LAST30DAYS": "Last 30 days",
+    "CATEGORY": "Category"
+  },
+  "FEEDBACK": {
+    "CATEGORY": "Feedback Category",
+    "CONTENT": "My Feedback",
+    "CANCEL": "Cancel",
+    "SUBMIT": "Submit"
+  }
+}
