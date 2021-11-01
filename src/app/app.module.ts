@@ -1,6 +1,5 @@
 import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ButtonModule, InfiniteLoaderModule, SearchBarModule, ToastModule, WeUiModule} from 'ngx-weui';
@@ -25,6 +24,7 @@ import * as Hammer from 'hammerjs';
 import {ImageDetailComponent} from "./pages/image-detail/image-detail.component";
 import { CoursesComponent } from './pages/courses/courses.component';
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
+import { MessageComponent } from './pages/message/message.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -52,6 +52,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     DocumentsComponent,
     CoursesComponent,
     CourseDetailComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

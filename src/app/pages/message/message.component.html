@@ -1,0 +1,30 @@
+<div>
+    <div class="main">
+        <div class="mui-input-row mui-search">
+            <input type="search" class="mui-input-clear" placeholder="搜索">
+        </div>
+        <div class="list">
+            <div class="message clearfix" *ngFor="let v of list;let i = index">
+                <img [src]="v.avatar" alt="" class="fl avatar">
+                <div class="fr info">
+                    <p class="c-name">{{v.name}}</p>
+                    <p class="content">{{v.content}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="mui-bar mui-bar-tab" style="z-index: 999">
+        <a class="mui-tab-item" href="index.html">
+            <i class="iconfont icon-shouye"></i>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a class="mui-tab-item active" href="message.html">
+            <i class="iconfont icon-xiaoxin"></i>
+            <span class="mui-tab-label">消息</span>
+        </a>
+        <a class="mui-tab-item " href="home.html">
+            <i class="iconfont icon-woden"></i>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+</div>

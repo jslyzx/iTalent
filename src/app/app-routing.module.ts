@@ -13,6 +13,7 @@ import {CoursesComponent} from "./pages/courses/courses.component";
 import {CourseDetailComponent} from "./pages/course-detail/course-detail.component";
 // import {SecionComponent} from "./pages/section/section.component";
 import {PostComponent} from "./pages/post/post.component";
+import {MessageComponent} from "./pages/message/message.component";
 
 
 const routes: Routes = [
@@ -67,6 +68,11 @@ const routes: Routes = [
       {
         path: 'courses',
         component: CoursesComponent,
+      },
+      {
+        path: 'message',
+        component: MessageComponent,
+        pathMatch: 'full',
       },
       {
         path: 'course/:courseId',
