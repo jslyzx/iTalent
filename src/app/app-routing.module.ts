@@ -11,7 +11,7 @@ import {DocDetailComponent} from './pages/doc-detail/doc-detail.component';
 import {ImageDetailComponent} from "./pages/image-detail/image-detail.component";
 import {CoursesComponent} from "./pages/courses/courses.component";
 import {CourseDetailComponent} from "./pages/course-detail/course-detail.component";
-// import {SecionComponent} from "./pages/section/section.component";
+import {SectionComponent} from "./pages/section/section.component";
 import {PostComponent} from "./pages/post/post.component";
 import {MessageComponent} from "./pages/message/message.component";
 
@@ -47,11 +47,11 @@ const routes: Routes = [
         path: 'pdf/:pdfId',
         component: PdfDetailComponent,
       },
-      // {
-      //   path: 'section/:sectionId',
-      //   component: SecionComponent,
-      //   pathMatch: 'full'
-      // },
+      {
+        path: 'section/:sectionId',
+        component: SectionComponent,
+        pathMatch: 'full'
+      },
       {
         path: 'post/:sectionId',
         component: PostComponent,

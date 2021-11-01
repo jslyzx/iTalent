@@ -15,4 +15,12 @@ export class PostService {
   ) {
   }
 
+  postArticle(payload) {
+    return this.http.post(`${environment.apiPrefix}/bbs/article/save`, payload).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }

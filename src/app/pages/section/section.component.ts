@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import { BaseComponent } from '../base.component';
+import {ActivatedRoute, Router} from "@angular/router";
 import {SectionService} from "../../services/section.service";
 import {DialogComponent, DialogConfig, DialogService, ToastComponent} from "ngx-weui";
 
@@ -8,23 +9,18 @@ import {DialogComponent, DialogConfig, DialogService, ToastComponent} from "ngx-
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss']
 })
-export class CourseDetailComponent implements OnInit {
-  @ViewChild('success', {static: true}) successToast: ToastComponent;
-  @ViewChild('failed', {static: true}) failedToast: ToastComponent;
-  @ViewChild('ios', {static: true}) iosAS: DialogComponent;
+export class SectionComponent extends BaseComponent implements OnInit {
 
   sectionId;
-  applicant: any;
-  course: any = {};
-  applicantsBySuperior = [];
-  toastMessage = '';
-  config: DialogConfig = {};
+
+  list = [];
 
   constructor(
-    private courseService: CourseService,
-    private srv: DialogService,
+    private sectionService: SectionService,
     private route: ActivatedRoute,
+    private router: Router
   ) {
+    super();
     this.route.paramMap.subscribe(params => {
       this.sectionId = params.get('sectionId');
       this.initData();
@@ -35,28 +31,21 @@ export class CourseDetailComponent implements OnInit {
   }
 
   private initData() {
-    this.courseService.getCourseById(this.sectionId).subscribe(
+    this.sectionService.getSectionFileList(this.sectionId).subscribe(
       (result: any) => {
         const {code, data, message} = result;
-        if (code === '1') {
-          this.course = data;
+        if (code === 1) {
+          this.list = data;
         }
       },
       (error: any) => {
         console.log(error);
       }
     )
-    this.courseService.getApplicantsByCourseIdBySuperior(this.sectionId).subscribe(
-      (result: any) => {
-        const {code, data, message} = result;
-        if (code === '1') {
-          this.applicantsBySuperior = data ? data : [];
-        }
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    )
+  }
+
+  toPost(){
+    this.router.navigate([`/app/post/${this.sectionId}`]);
   }
 
 }

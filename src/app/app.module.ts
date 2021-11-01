@@ -26,6 +26,7 @@ import { CoursesComponent } from './pages/courses/courses.component';
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { MessageComponent } from './pages/message/message.component';
 import { PostComponent } from './pages/post/post.component';
+import { SectionComponent } from './pages/section/section.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,7 +55,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     CoursesComponent,
     CourseDetailComponent,
     MessageComponent,
-    PostComponent
+    PostComponent,
+    SectionComponent
   ],
   imports: [
     BrowserModule,

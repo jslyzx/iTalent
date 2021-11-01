@@ -1,0 +1,48 @@
+<div>
+    <div class="top">
+        <div class="mui-input-row mui-search">
+            <input type="search" class="mui-input-clear" placeholder="软件工程师">
+        </div>
+        <div class="navbar clearfix">
+            <div class="nav active">置顶</div>
+            <div class="nav">实时</div>
+            <div class="nav">提问</div>
+            <div class="nav">分享</div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="post" *ngFor="let p of list">
+            <h3 class="title">{{p.title}}</h3>
+            <div class="clearfix">
+                <img [src]="p.avator" alt="" class="avator fl">
+                <span class="fl author">{{p.articleAuthor}}</span>
+            </div>
+            <div class="con">{{p.articleContent}}</div>
+            <div class="info">
+                <span *ngIf="p.z">{{p.z}} 赞</span>
+                <span *ngIf="p.pl">{{p.pl}} 评论</span>
+                <span *ngIf="p.zf">{{p.zf}} 转发</span>
+                <span *ngIf="p.sc">{{p.sc}} 收藏</span>
+                <span *ngIf="p.createTime">{{p.createTime}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="block" (click)="toPost()">
+        <i class="iconfont icon-fatie"></i>
+        <p class="text">我要发帖</p>
+    </div>
+    <nav class="mui-bar mui-bar-tab" style="z-index: 999">
+        <a class="mui-tab-item" [routerLink]="['/app/documents']">
+            <i class="iconfont icon-shouye"></i>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a class="mui-tab-item" [routerLink]="['/app/message']">
+            <i class="iconfont icon-xiaoxin"></i>
+            <span class="mui-tab-label">消息</span>
+        </a>
+        <a class="mui-tab-item" [routerLink]="['/app/mine']">
+            <i class="iconfont icon-woden"></i>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+</div>
