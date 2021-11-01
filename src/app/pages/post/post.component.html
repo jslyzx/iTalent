@@ -1,13 +1,21 @@
 <div class="main">
     <div class="ope clearfix">
         <span class="cancel fl">取消</span>
-        <button class="post">发布</button>
+        <button class="post" (click)="submit()">发布</button>
         <button class="draft">草稿</button>
     </div>
     <input type="text" class="title" placeholder="标题">
     <textarea class="content" id="content" placeholder="输入要发的内容（最多输入1万字）"></textarea>
+    <ul class="weui-uploader__files" style="overflow: hidden;">
+        <li class="weui-uploader__file" *ngFor="let item of uploader.queue" [weui-thumb]="item._file" (click)="onGallery(item)" [ngClass]="{ 'weui-uploader__file_status': item.isError }">
+            <div class="weui-uploader__file-content" *ngIf="item.isUploading">{{ item.progress }}%</div>
+            <div class="weui-uploader__file-content" *ngIf="item.isError">
+                <i class="weui-icon-warn"></i>
+            </div>
+        </li>
+    </ul>
     <div class="s-b clearfix">
-        <i class="iconfont icon-tupian"></i>
+        <i class="iconfont icon-tupian" (click)="triggerClick()"></i>
         <i class="iconfont icon-biaoqing"></i>
         <i class="iconfont icon-fujian"></i>
         <!-- <mt-checklist v-model="checked" :options="['设置封面图']" class="fr">
@@ -26,8 +34,28 @@
         </div>
     </div>
     <div class="clearfix">
+        <i class="iconfont icon-fenlei fl" style="color: #646464;"></i>
+        <span class="fl" style="margin-left: 20px;color: #646464;">选择模块</span>
+        <a href="javascript:;" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
+    </div>
+    <div class="clearfix" style="margin-top: 10px;">
         <i class="iconfont icon-at fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">提醒谁看</span>
         <a href="javascript:;" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
     </div>
+    <!-- <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <div class="weui-uploader__bd">
+                        <div class="weui-uploader__input-box">
+                            <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploader" />
+                        </div>
+                    </div>
+                </div>
+                <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
+            </div>
+        </div>
+    </div> -->
+    <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploader" style="display: none;" #fileInput />
 </div>
