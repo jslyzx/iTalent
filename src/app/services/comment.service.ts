@@ -16,7 +16,7 @@ export class CommentService {
   }
 
   postComment(payload) {
-    return this.http.post(`${environment.apiPrefix}/bbs/article/save`, payload).pipe(
+    return this.http.post(`${environment.apiPrefix}/bbs/articleComment/save`, payload).pipe(
       map((result: any) => {
         return result;
       }),

@@ -123,7 +123,7 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
                 return false;
             }
             const self = this;
-            this.commentService.postArticle({
+            this.commentService.postComment({
               articleId: this.articleId,
               commentInfo: this.content,
               articleCommentImgs: _.map(this.uploader.options.params.picList,function(v){return v.url}).join()
@@ -134,7 +134,7 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
                         self.text = '已提交';
                         self.type = 'success';
                         self.toptips.onShow();
-                        self.router.navigate([`/app/section/${self.sectionId}`]);
+                        self.router.navigate([`/app/article/${self.articleId}`]);
                     }
                 },
                 error => {

@@ -48,4 +48,8 @@ export class SectionComponent extends BaseComponent implements OnInit {
     this.router.navigate([`/app/post/${this.sectionId}`]);
   }
 
+  toDetail(articleId){
+    this.router.navigate([`/app/article/${articleId}`]);
+  }
+
 }

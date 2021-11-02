@@ -16,7 +16,7 @@
             </div>
             <div class="content" v-html="article.articleContent"></div>
             <div class="comments">
-                <div class="comment clearfix" *ngFor="comment of articleCommentList">
+                <div class="comment clearfix" *ngFor="let comment of articleCommentList">
                     <img src="assets/images/avatar.jpg" class="avator fl">
                     <div class="fl" style="width: calc(100% - 64px);">
                         <p class="c-n">{{comment.author}}</p>

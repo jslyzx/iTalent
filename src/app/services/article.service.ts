@@ -16,7 +16,7 @@ export class ArticleService {
   }
 
   getArticleDetail(articleId) {
-    return this.http.get(`${environment.apiPrefix}/bbs/article/getById`, {id: articleId}).pipe(
+    return this.http.get(`${environment.apiPrefix}/bbs/article/getById`, {params:{id: articleId}}).pipe(
       map((result: any) => {
         return result;
       }),
