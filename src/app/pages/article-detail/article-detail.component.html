@@ -1,5 +1,5 @@
 <div>
-    <div class="main">
+    <div class="main" *ngIf="article">
         <div class="head">
             <div class="tags clearfix">
                 <span class="tag">{{article.sectionName}}</span>
@@ -14,7 +14,7 @@
                     <p class="sign" *ngIf="article.sign">{{article.sign}}</p>
                 </div>
             </div>
-            <div class="content" v-html="article.articleContent"></div>
+            <div class="content" [innerHTML]="article.articleContent"></div>
             <div class="comments">
                 <div class="comment clearfix" *ngFor="let comment of articleCommentList">
                     <img src="assets/images/avatar.jpg" class="avator fl">
@@ -51,7 +51,7 @@
         </div>
     </div>
     <nav class="mui-bar mui-bar-tab" style="z-index: 999">
-        <a class="mui-tab-item">
+        <a class="mui-tab-item" (click)="like()">
             <span class="mui-tab-label"><i class="iconfont icon-dianzan"></i>点赞</span>
             <span class="split"></span>
         </a>

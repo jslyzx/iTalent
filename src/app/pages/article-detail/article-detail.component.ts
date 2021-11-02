@@ -72,4 +72,8 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
 
   }
 
+  like(){
+    return false;
+  }
+
 }

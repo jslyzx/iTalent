@@ -1,4 +1,9 @@
-.mui-bar-tab .mui-tab-item {
+html{
+    touch-action: none;
+}
+
+.mui-bar-tab .mui-tab-item,
+.mui-bar-tab .mui-tab-item.mui-active {
     color: #000;
 }
 
@@ -12,6 +17,8 @@
 
 .mui-tab-label .iconfont {
     margin-right: 4px;
+    display: inline;
+    font-size: 16px;
 }
 
 .main {
@@ -49,9 +56,12 @@
 }
 
 .title {
-    font-size: 18px;
+    font-size: 18px!important;
     color: #2C0000;
-    margin-top: 15px;
+    margin-top: 15px!important;
+    margin-bottom: 5px!important;
+    line-height: 1!important;
+    font-weight: bold!important;
 }
 
 .author {}
