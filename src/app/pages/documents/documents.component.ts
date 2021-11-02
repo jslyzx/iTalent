@@ -420,4 +420,8 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
             }
         );
     }
+
+    toSection(sectionId){
+        this.router.navigate([`/app/section/${sectionId}`]);
+    }
 }

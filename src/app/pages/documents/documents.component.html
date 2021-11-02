@@ -17,7 +17,7 @@
         <div *ngFor="let tag of tags; let i = index" class="nav" [ngClass]="{'active': i === selected}" (click)="changeTag(i)">{{tag.tagName}}</div>
     </div>
     <div class="content clearfix">
-        <div class="item" *ngFor="let channel of channels">
+        <div class="item" *ngFor="let channel of channels" (click)="toSection(channel.id)">
             <img src="./assets/images/my-banner.jpg" alt="">
             <div class="front">
                 <i class="iconfont icon-ruanjian"></i>
