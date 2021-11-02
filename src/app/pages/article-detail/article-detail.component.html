@@ -1,0 +1,71 @@
+<div>
+    <div class="main">
+        <div class="head">
+            <div class="tags clearfix">
+                <span class="tag">{{article.sectionName}}</span>
+            </div>
+            <h2 class="title">{{article.articleTitle}}</h2>
+        </div>
+        <div class="body">
+            <div class="author clearfix">
+                <img src="assets/images/avatar.jpg" alt="作者" class="avator fl">
+                <div class="fl">
+                    <p class="name">{{article.articleAuthor}}</p>
+                    <p class="sign" *ngIf="article.sign">{{article.sign}}</p>
+                </div>
+            </div>
+            <div class="content" v-html="article.articleContent"></div>
+            <div class="comments">
+                <div class="comment clearfix" *ngFor="comment of articleCommentList">
+                    <img src="assets/images/avatar.jpg" class="avator fl">
+                    <div class="fl" style="width: calc(100% - 64px);">
+                        <p class="c-n">{{comment.author}}</p>
+                        <p class="c-c">{{comment.content}}</p>
+                        <p class="time">{{comment.time}}</p>
+                        <div class="fr action">
+                            <i class="iconfont icon-pinglun"></i>
+                            <i class="iconfont icon-dianzan"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="view-more">查看全部评论 <span class="mui-icon mui-icon-arrowright" style="font-size: 16px;"></span></p>
+            </div>
+            <div class="info">
+                <span v-if="post.z"><i class="iconfont icon-dianzan"></i>{{article.likeNumber}}</span>
+                <span v-if="post.pl"><i class="iconfont icon-pinglun"></i>{{article.commentNumber}}</span>
+                <span v-if="post.zf"><i class="iconfont icon-zhuanfa"></i>{{article.forwardNumber}}</span>
+                <span v-if="post.sc"><i class="iconfont icon-shoucang"></i>{{article.collectNumber}}</span>
+            </div>
+            <div class="links">
+                <div class="fl">或许你还想看：</div>
+                <div class="fl" style="width: calc(100% - 86px);">
+                    <span class="link" *ngFor="let l of moreLinks">{{l}}</span>
+                </div>
+            </div>
+            <div class="links">
+                <div class="fl">本文作者还发布过：</div>
+                <div class="fl" style="width: calc(100% - 110px);">
+                    <span class="link" *ngFor="let l of otherArticles">{{l}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="mui-bar mui-bar-tab" style="z-index: 999">
+        <a class="mui-tab-item">
+            <span class="mui-tab-label"><i class="iconfont icon-dianzan"></i>点赞</span>
+            <span class="split"></span>
+        </a>
+        <a class="mui-tab-item">
+            <span class="mui-tab-label"><i class="iconfont icon-pinglun"></i>评论</span>
+            <span class="split"></span>
+        </a>
+        <a class="mui-tab-item">
+            <span class="mui-tab-label"><i class="iconfont icon-zhuanfa"></i>转发</span>
+            <span class="split"></span>
+        </a>
+        <a class="mui-tab-item">
+            <span class="mui-tab-label"><i class="iconfont icon-shoucang"></i>收藏</span>
+            <span class="split" style="position: relative;left: 99999px;"></span>
+        </a>
+    </nav>
+</div>

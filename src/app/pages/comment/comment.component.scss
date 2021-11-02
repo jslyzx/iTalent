@@ -1,0 +1,46 @@
+html,
+body {
+    background-color: #fff;
+}
+
+.main {
+    padding: 20px;
+}
+
+.ope button {
+    border: none;
+    color: #fff;
+    float: right;
+}
+
+.ope .post {
+    background-color: #00893D;
+    margin-left: 20px;
+}
+
+.ope .cancel {
+    color: #646464;
+    line-height: 31px;
+}
+
+
+.main .content {
+    border: none;
+    min-height: 300px;
+    margin-top: 20px;
+    border-top: 1px solid #979797;
+}
+
+.s-b .iconfont {
+    float: left;
+    line-height: 56px;
+    font-size: 20px;
+    color: #646464;
+}
+.s-b .iconfont ~ .iconfont{
+	margin-left: 20px;
+}
+.mint-switch-input:checked + .mint-switch-core{
+    background-color: #07A35A;
+    border-color: #07A35A;
+}

@@ -14,6 +14,8 @@ import {CourseDetailComponent} from "./pages/course-detail/course-detail.compone
 import {SectionComponent} from "./pages/section/section.component";
 import {PostComponent} from "./pages/post/post.component";
 import {MessageComponent} from "./pages/message/message.component";
+import {CommentComponent} from "./pages/comment/comment.component";
+import {ArticleDetailComponent} from "./pages/article-detail/article-detail.component";
 
 
 const routes: Routes = [
@@ -77,6 +79,14 @@ const routes: Routes = [
       {
         path: 'course/:courseId',
         component: CourseDetailComponent,
+      },
+      {
+        path: 'comment/:articleId',
+        component: CommentComponent
+      },
+      {
+        path: 'article/:articleId',
+        component: ArticleDetailComponent
       },
       {path: '**', component: DashboardComponent},
     ],
