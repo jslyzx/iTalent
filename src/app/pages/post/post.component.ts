@@ -13,7 +13,7 @@ import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips'
     selector: 'app-post',
     templateUrl: './post.component.html',
     styleUrls: ['./post.component.scss'],
-    encapsulation: ViewEncapsulation.ShadowDom,
+    encapsulation: ViewEncapsulation.Emulated,
 })
 export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
