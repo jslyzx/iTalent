@@ -136,235 +136,11 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
         this.initData();
     }
 
-    // swipe(eType) {
-    //   if (eType === this.SWIPE_ACTION.LEFT && this.selected < this.documentsCategory.length - 1) {
-    //     this.selected++;
-    //     this.onTapTab({index: this.selected});
-    //   } else if (eType === this.SWIPE_ACTION.RIGHT && this.selected > 0) {
-    //     this.selected--;
-    //     this.onTapTab({index: this.selected});
-    //   }
-    // }
-
-    onLoadMore(comp: InfiniteLoaderComponent) {
-        timer(500).subscribe(() => {
-            if (this.items.length >= this.totalCount) {
-                comp.setFinished();
-                return;
-            } else {
-                this.currentPage += 1;
-                this.loadDocuments(true);
-            }
-        });
-    }
-
-    onRefresh(ptr: PTRComponent) {
-        timer(800).subscribe(() => {
-            this.currentPage = 1;
-            this.loadDocuments();
-            this.showLoadMore();
-            if (this.lang === 'en') {
-                ptr.setFinished('Last Update：' + moment().format('YYYY-MM-DD HH:mm:ss'));
-            } else {
-                ptr.setFinished('上次刷新：' + moment().format('YYYY-MM-DD HH:mm:ss'));
-            }
-        });
-    }
-
-    onDetail(document) {
-        switch (document.currentType) {
-            case 1:
-                this.router.navigate([`/app/pdf/${document.id}`]);
-                break;
-            case 2:
-                this.router.navigate([`/app/doc/${document.id}`]);
-                break;
-            case 3:
-                window.location.href = document.link;
-                break;
-            case 4:
-                this.router.navigate([`/app/image/${document.id}`]);
-                break;
-            default:
-                break;
-        }
-    }
-
-    onSearch(term: string) {
-        // console.log(term);
-        // this.searchContent.fileNameCn = term;
-        // this.currentPage = 1;
-        // this.loadDocuments();
-    }
-
-    onCancel() {
-        this.searchContent.fileNameCn = null;
-        this.currentPage = 1;
-        this.loadDocuments();
-    }
-
-    onClear() {
-        this.searchContent.fileNameCn = null;
-        this.currentPage = 1;
-        this.loadDocuments();
-    }
-
-    onSubmit(value: string) {
-        this.searchContent.fileNameCn = value;
-        this.currentPage = 1;
-        this.loadDocuments();
-    }
-
-    chooseTag(tag) {
-        if (tag.id !== this.tagId) {
-            this.tagId = tag.id;
-        } else {
-            this.tagId = null;
-        }
-        this.searchContent.tagId = this.tagId;
-        this.loadDocuments();
-    }
 
     changeTag(i) {
         this.selected = i;
-    }
-
-    onFilterCategory(category) {
-        if (!category) {
-            return;
-        }
-        this.documentService.getDocumentCategoryTagByCategoryId(category.id, { status: 1 }).subscribe(
-            (result: any) => {
-                const { code, data, message } = result;
-                if (code === '1') {
-                    this.documentsCategoryTags = data ? data : [];
-                }
-            },
-            (error: any) => {
-                console.error(error);
-                // this.toastService.show(error);
-            }
-        )
-        this.searchContent.categoryId = parseInt(category.id, 0);
-        this.currentPage = 1;
-        this.infiniteLoaderComponent && this.infiniteLoaderComponent.restart();
-        this.showLoadMore();
-        this.loadDocuments();
-    }
-
-    onChangeCategory(category: any) {
-        if (this.categoryId == category.id) {
-            return;
-        }
-        this.items = [];
-        this.documentsCategoryTags = [];
-        this.searchContent.tagId = null;
-        this.tagId = null;
-        this.router.navigate(['/app/documents/', category.id])
-    }
-
-    onTapTab(event: any) {
-        console.log(event);
-        const category = this.documentsCategory[event.index];
-        // this.onFilterCategory(category);
-        this.router.navigate(['/app/documents/', category.id])
-    }
-
-    onCloseFeedbackDialog() {
-        this.fullPopup.hide();
-        this.feedbackCategory = this.feedbackCategories[0].id;
-        this.feedbackContent = '';
-    }
-
-    onSubmitFeedback() {
-        const params = {
-            category: this.feedbackCategory,
-            content: this.feedbackContent,
-            title: this.feedbackCategory
-        };
-        this.authService.createFeedback(params).subscribe(
-            (result: any) => {
-                const { code, data, message } = result;
-                if (code === '1') {
-                    this.onCloseFeedbackDialog();
-                }
-                this.toastService.show(message);
-            }, error => {
-                console.error(error);
-                this.toastService.show(error);
-            }
-        );
-    }
-
-    generateThumbnail(doc: any) {
-        if (doc.titleImage) {
-            return `https://gw-hrupdate.schaefflercn.com/view/download/${doc.id}/title/image?scale=0.4`;
-        } else {
-            return './assets/images/example-logo.png';
-        }
-    }
-
-    onChangeLanguage(lang) {
-        if (this.lang === lang) {
-            return;
-        }
-        this.lang = lang;
-        this.loadDocuments();
-        localStorage.setItem('ngx_lang', lang);
-        this.lang = localStorage.getItem('ngx_lang');
-        this.translate.use(lang);
-        this.translate.get('TITLE').subscribe((value => {
-            this.appTitle.setTitle(value);
-        }));
-    }
-
-    private showLoadMore() {
-        const loadMoreElement: any = document.getElementsByClassName('weui-loadmore')[0];
-        if (loadMoreElement) {
-            loadMoreElement.style.display = 'block';
-        }
-    }
-
-    private loadDocuments(isLoadMore ? ) {
-        // this.mask.show();
-        // this.loading = true;
-        this.searchContent.lang = this.lang === 'en' ? 1 : 0;
-        this.documentService.getDocumentByPageAndSize(this.currentPage, this.pageSize, this.searchContent).subscribe(
-            (result: any) => {
-                // setTimeout(() => {
-                //   this.mask.hide();
-                //   this.loading = false;
-                // }, 600);
-                const { code, data, message } = result;
-                if (code === '1') {
-                    if (!isLoadMore) {
-                        this.items = data.content ? data.content : [];
-                        this.totalCount = data.totalElements;
-                        this.hiddenLoadMore();
-                    } else {
-                        if (data.content) {
-                            this.items = this.items.concat(data.content);
-                            this.totalCount = data.totalElements;
-                            this.infiniteLoaderComponent.resolveLoading();
-                            this.infiniteLoaderComponent.setFinished();
-                        }
-                    }
-                }
-            }, error => {
-                // setTimeout(() => {
-                //   this.mask.hide();
-                //   this.loading = false;
-                // }, 600);
-                console.error(error);
-            }
-        );
-    }
-
-    private hiddenLoadMore() {
-        const loadMoreElement: any = document.getElementsByClassName('weui-loadmore')[0];
-        if (loadMoreElement) {
-            loadMoreElement.style.display = 'none';
-        }
+        this.tagId = this.tags[i].id;
+        this.onSelectTag();
     }
 
     private initData() {
@@ -384,12 +160,14 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
                 const { code, data, message } = result;
                 if (code === 1) {
                     this.tags = data;
+                    this.tagId = data[0].id;
                     // window.localStorage.setItem('ngx_documentsCategory', JSON.stringify(data.content));
                     // if (this.categoryId) {
                     //   this.onFilterCategory({id: this.categoryId});
                     // } else {
                     //   this.onFilterCategory(this.documentsCategory[0]);
                     // }
+                    this.onSelectTag();
                 } else {
                     this.tags = [];
                 }
@@ -399,7 +177,15 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
                 console.error(error);
             }
         );
-        this.documentService.getChannelByTag().subscribe(
+        
+    }
+
+    toSection(sectionId){
+        this.router.navigate([`/app/section/${sectionId}`]);
+    }
+
+    onSelectTag(){
+        this.documentService.getChannelByTag(this.tagId).subscribe(
             (result: any) => {
                 const { code, data, message } = result;
                 if (code === 1) {
@@ -419,9 +205,5 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
                 console.error(error);
             }
         );
-    }
-
-    toSection(sectionId){
-        this.router.navigate([`/app/section/${sectionId}`]);
     }
 }

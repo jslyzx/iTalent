@@ -128,8 +128,8 @@ export class DocumentService {
     );
   }
 
-  getChannelByTag() {
-    return this.http.get(`${environment.apiPrefix}/bbs/bbsSection/ajaxList`, {params:{tagId: '3'}}).pipe(
+  getChannelByTag(tagId) {
+    return this.http.get(`${environment.apiPrefix}/bbs/bbsSection/ajaxList`, {params:{tagId: tagId}}).pipe(
       map((result: any) => {
         return result;
       })
