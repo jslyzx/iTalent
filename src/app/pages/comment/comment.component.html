@@ -1,8 +1,7 @@
 <div class="main">
     <div class="ope clearfix">
-        <span class="cancel fl">取消</span>
+        <span class="cancel fl" (click)="cancel()">取消</span>
         <button class="post" (click)="submit()">发布</button>
-        <button class="draft">草稿</button>
     </div>
     <textarea class="content" id="content" placeholder="输入要发的内容（最多输入1万字）" [(ngModel)]="content"></textarea>
     <ul class="weui-uploader__files" style="overflow: hidden;">
@@ -18,12 +17,12 @@
         <i class="iconfont icon-biaoqing"></i>
     </div>
     
-    <div class="clearfix" style="margin-top: 10px;">
+    <div class="clearfix" style="margin-top: 10px;font-size:17px;line-height: 21px;">
         <i class="iconfont icon-at fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">提醒谁看</span>
         <a (click)="mention()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
     </div>
-    <div class="clearfix">
+    <div class="clearfix" style="margin-top: 10px;font-size:17px;line-height: 21px;">
         <i class="iconfont icon-gengxin fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">开启追更</span>
         <!-- <a (click)="chooseMk()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a> -->

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {BaseComponent} from '../base.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ArticleService} from '../../services/article.service';
 import {DomSanitizer, Meta, Title} from '@angular/platform-browser';
 import {LocalStorage} from 'ngx-store';
@@ -13,7 +13,7 @@ import {TranslateService} from "@ngx-translate/core";
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ArticleDetailComponent extends BaseComponent implements OnInit {
   article;
@@ -32,6 +32,7 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private articleService: ArticleService,
     private meta: Meta,
     private appTitle: Title,
@@ -74,6 +75,10 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
 
   like(){
     return false;
+  }
+
+  comment(){
+    this.router.navigate([`/app/comment/${this.articleId}`]);
   }
 
 }

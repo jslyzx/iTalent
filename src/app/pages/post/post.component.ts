@@ -13,7 +13,7 @@ import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips'
     selector: 'app-post',
     templateUrl: './post.component.html',
     styleUrls: ['./post.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
@@ -162,6 +162,10 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
     mention() {
 
+    }
+
+    cancel(){
+        history.go(-1);
     }
 
 }

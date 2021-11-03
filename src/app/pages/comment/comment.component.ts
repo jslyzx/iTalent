@@ -13,7 +13,7 @@ import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips'
     selector: 'app-comment',
     templateUrl: './comment.component.html',
     styleUrls: ['./comment.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.Emulated,
 })
 export class CommentComponent extends BaseComponent implements OnInit, OnDestroy {
 
@@ -150,6 +150,10 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
 
     mention() {
 
+    }
+
+    cancel(){
+        history.go(-1);
     }
 
 }
