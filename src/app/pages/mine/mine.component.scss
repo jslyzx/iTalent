@@ -1,0 +1,59 @@
+.mine {
+    .head {
+        height: 127px;
+        background-color: #fff;
+        padding: 37px 0 0 24px;
+    }
+
+    .head .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        margin-right: 10px;
+    }
+
+    .head p {
+        margin-bottom: 0;
+        color: #2C0000;
+    }
+
+    .head .name {
+        font-size: 15px;
+        margin-top: 12px;
+    }
+
+    .head .sign {
+        font-size: 12px;
+    }
+
+    .section {
+        background-color: #fff;
+        border-radius: 10px;
+        margin: 25px 12px;
+    }
+
+    .section .title {
+        color: #272222;
+        font-size: 18px;
+        padding-top: 20px;
+        padding-left: 33px;
+        font-weight: bold;
+    }
+
+    .section .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 20px;
+        margin-top: 18px;
+    }
+
+    .wrap .item {
+        width: 100px;
+        text-align: center;
+        height: 60px;
+    }
+
+    .item .iconfont {
+        font-size: 20px;
+    }
+}

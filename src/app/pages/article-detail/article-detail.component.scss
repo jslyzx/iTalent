@@ -1,146 +1,162 @@
-html{
+.article-detail {
+    .mui-bar-tab .mui-tab-item,
+    .mui-bar-tab .mui-tab-item.mui-active {
+        color: #000;
+    }
+
+    .split {
+        width: 1px;
+        height: 20px;
+        background-color: #ccc;
+        display: inline-block;
+        float: right;
+    }
+
+    .mui-tab-label .iconfont {
+        margin-right: 4px;
+        display: inline;
+        font-size: 16px;
+    }
+
+    .main {
+        position: absolute;
+        top: 0;
+        bottom: 50px;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        overflow: auto;
+    }
+
+    .main .head {
+        padding: 10px 0 10px 20px;
+        border-bottom: 1px solid #979797;
+    }
+
+    .tags .tag {
+        color: #646464;
+        font-size: 14px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 15px;
+        border-radius: 4px;
+        background-color: #EBEEF0;
+        float: left;
+    }
+
+    .tags .tag~.tag {
+        margin-left: 15px;
+    }
+
+    .main .body {
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 18px;
+        color: #2C0000;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        line-height: 1;
+    }
+
+    .author {}
+
+    .author .avator,
+    .comment .avator {
+        width: 48px;
+        height: 48px;
+        border-radius: 48px;
+        margin-right: 10px;
+    }
+
+    .author .name {
+        color: #2c0000;
+        font-size: 14px;
+        margin-bottom: 0;
+        margin-top: 4px;
+    }
+
+    .author .sign {
+        color: #646464;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .body .content {
+        margin: 10px 0;
+        font-size: 15px;
+    }
+
+    .comment p {
+        margin-bottom: 0;
+    }
+
+    .comment .c-n {
+        color: #646464;
+        font-size: 12px;
+    }
+
+    .comment .c-c {
+        font-size: 14px;
+        color: #000;
+    }
+
+    .comment .time {
+        font-size: 12px;
+        color: #646464;
+    }
+
+    .comment .action i {
+        color: #646464;
+    }
+
+    .comment .action i~i {
+        margin-left: 20px;
+    }
+
+    .view-more {
+        text-align: center;
+    }
+
+    .info {
+        text-align: right;
+    }
+
+    .info span {
+        font-size: 12px;
+        color: #646464;
+    }
+
+    .info span~span {
+        margin-left: 20px;
+    }
+
+    .info span .iconfont {
+        margin-right: 4px;
+    }
+
+    .links {
+        font-size: 12px;
+        color: #595555;
+        margin-top: 20px;
+    }
+
+    .links .link {
+        color: #000;
+        background-color: #D8D8D8;
+        border-radius: 6px;
+        text-align: center;
+        padding: 6px;
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .links .link~.link {
+        margin-left: 15px;
+    }
+}
+
+html {
     touch-action: none;
-}
-
-.mui-bar-tab .mui-tab-item,
-.mui-bar-tab .mui-tab-item.mui-active {
-    color: #000;
-}
-
-.split {
-    width: 1px;
-    height: 20px;
-    background-color: #ccc;
-    display: inline-block;
-    float: right;
-}
-
-.mui-tab-label .iconfont {
-    margin-right: 4px;
-    display: inline;
-    font-size: 16px;
-}
-
-.main {
-    position: absolute;
-    top: 0;
-    bottom: 50px;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    overflow: auto;
-}
-
-.main .head {
-    padding: 10px 0 10px 20px;
-    border-bottom: 1px solid #979797;
-}
-
-.tags .tag {
-    color: #646464;
-    font-size: 14px;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 15px;
-    border-radius: 4px;
-    background-color: #EBEEF0;
-    float: left;
-}
-
-.tags .tag~.tag {
-    margin-left: 15px;
-}
-
-.main .body {
-    padding: 20px;
-}
-
-.title {
-    font-size: 18px;
-    color: #2C0000;
-    margin-top: 15px;
-}
-
-.author {}
-
-.author .avator,
-.comment .avator {
-    width: 48px;
-    height: 48px;
-    border-radius: 48px;
-    margin-right: 10px;
-}
-
-.author .name {
-    color: #2c0000;
-    font-size: 14px;
-    margin-bottom: 0;
-    margin-top: 4px;
-}
-
-.author .sign {
-    color: #646464;
-    font-size: 14px;
-    margin-bottom: 0;
-}
-
-.body .content {
-    margin: 10px 0;
-    font-size: 15px;
-}
-
-.comment p {
-    margin-bottom: 0;
-}
-
-.comment .c-n {
-	color: #646464;
-	font-size: 12px;
-}
-.comment .c-c{
-	font-size: 14px;
-	color: #000;
-}
-.comment .time{
-	font-size: 12px;
-	color: #646464;
-}
-.comment .action i{
-	color: #646464;
-}
-.comment .action i ~ i{
-	margin-left: 20px;
-}
-.view-more{
-	text-align: center;
-}
-.info{
-	text-align: right;
-}
-.info span{
-	font-size: 12px;
-	color: #646464;
-}
-.info span ~ span{
-	margin-left: 20px;
-}
-.info span .iconfont{
-	margin-right: 4px;
-}
-.links{
-	font-size: 12px;
-	color: #595555;
-	margin-top: 20px;
-}
-.links .link{
-	color: #000;
-	background-color: #D8D8D8;
-	border-radius: 6px;
-	text-align: center;
-	padding: 6px;
-	float: left;
-	margin-bottom: 10px;
-}
-.links .link ~ .link{
-	margin-left: 15px;
 }

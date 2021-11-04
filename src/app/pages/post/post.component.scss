@@ -1,73 +1,76 @@
-html,
-body {
+.post-c {
     background-color: #fff;
-}
 
-.main {
     padding: 20px;
-}
 
-.ope button {
-    border: none;
-    color: #fff;
-    float: right;
-}
+    .ope button {
+        border: none;
+        color: #fff;
+        float: right;
+    }
 
-.ope .draft {
-    background-color: #646464;
-}
+    .ope .draft {
+        background-color: #646464;
+    }
 
-.ope .post {
-    background-color: #00893D;
-    margin-left: 20px;
-}
+    .ope .post {
+        background-color: #00893D;
+        margin-left: 20px;
+    }
 
-.ope .cancel {
-    color: #646464;
-    line-height: 31px;
-}
+    .ope .cancel {
+        color: #646464;
+        line-height: 31px;
+    }
 
-.main .title {
-    border: none;
-    border-bottom: 1px solid #979797;
-    font-size: 26px;
-    padding-left: 0;
-}
+    .title {
+        border: none;
+        border-bottom: 1px solid #979797;
+        font-size: 26px;
+        padding-left: 0;
+    }
 
-.main .content {
-    border: none;
-    min-height: 300px;
-}
+    .content {
+        border: none;
+        min-height: 300px;
+    }
 
-.mint-checkbox-core {
-    border-radius: initial !important;
-}
+    .mint-checkbox-core {
+        border-radius: initial !important;
+    }
 
-.s-b .iconfont {
-    float: left;
-    line-height: 56px;
-    font-size: 20px;
-}
-.s-b .iconfont ~ .iconfont{
-	margin-left: 20px;
-}
-.mint-checkbox-input:checked + .mint-checkbox-core{
-    background-color: #07A35A;
-    border-color: #07A35A;
-}
-.weui-cells{
-    line-height: inherit;
-    background-color: transparent;
-    margin-top: 0;
-    float: right;
-}
-.weui-cells:before,
-.weui-cells:after{
-    content: none;
-}
-.weui-cell__bd p{
-    margin-bottom: 0;
-}
-.weui-check__label:active{
-    background-color: transparent;
+    .s-b .iconfont {
+        float: left;
+        line-height: 56px;
+        font-size: 20px;
+    }
+
+    .s-b .iconfont~.iconfont {
+        margin-left: 20px;
+    }
+
+    .mint-checkbox-input:checked+.mint-checkbox-core {
+        background-color: #07A35A;
+        border-color: #07A35A;
+    }
+
+    .weui-cells {
+        line-height: inherit;
+        background-color: transparent;
+        margin-top: 0;
+        float: right;
+    }
+
+    .weui-cells:before,
+    .weui-cells:after {
+        content: none;
+    }
+
+    .weui-cell__bd p {
+        margin-bottom: 0;
+    }
+
+    .weui-check__label:active {
+        background-color: transparent;
+    }
 }

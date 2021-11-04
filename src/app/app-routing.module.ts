@@ -16,6 +16,7 @@ import {PostComponent} from "./pages/post/post.component";
 import {MessageComponent} from "./pages/message/message.component";
 import {CommentComponent} from "./pages/comment/comment.component";
 import {ArticleDetailComponent} from "./pages/article-detail/article-detail.component";
+import {MineComponent} from "./pages/mine/mine.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,11 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DocumentsComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'mine',
+        component: MineComponent,
         pathMatch: 'full',
       },
       {

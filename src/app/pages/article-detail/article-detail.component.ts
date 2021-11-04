@@ -13,7 +13,7 @@ import {TranslateService} from "@ngx-translate/core";
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.None
 })
 export class ArticleDetailComponent extends BaseComponent implements OnInit {
   article;
