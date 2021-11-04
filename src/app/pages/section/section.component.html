@@ -12,7 +12,7 @@
     </div>
     <div class="main">
         <div class="post" *ngFor="let p of list" (click)="toDetail(p.id)">
-            <h3 class="title">{{p.title}}</h3>
+            <h3 class="title">{{p.articleTitle}}</h3>
             <div class="clearfix">
                 <img [src]="p.avator" alt="" class="avator fl">
                 <span class="fl author">{{p.articleAuthor}}</span>
