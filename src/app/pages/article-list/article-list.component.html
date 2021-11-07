@@ -1,15 +1,4 @@
-<div class="section">
-    <div class="top">
-        <div class="mui-input-row mui-search">
-            <input type="search" class="mui-input-clear" placeholder="软件工程师">
-        </div>
-        <div class="navbar clearfix">
-            <div class="nav active">置顶</div>
-            <div class="nav">实时</div>
-            <div class="nav">提问</div>
-            <div class="nav">分享</div>
-        </div>
-    </div>
+<div class="article-list">
     <div class="main">
         <div class="post" *ngFor="let p of list" (click)="toDetail(p.id)">
             <h3 class="title">{{p.articleTitle}}</h3>
@@ -32,10 +21,6 @@
                 <img [src]="staticPath + p.coverImg" alt="" class="cover">
             </div>
         </div>
-    </div>
-    <div class="block" (click)="toPost()">
-        <i class="iconfont icon-fatie"></i>
-        <p class="text">我要发帖</p>
     </div>
     <nav class="mui-bar mui-bar-tab" style="z-index: 999">
         <a class="mui-tab-item" [routerLink]="['/app/documents']">

@@ -23,4 +23,12 @@ export class ArticleService {
     );
   }
 
+  getArticleListByType(type) {
+    return this.http.get(`${environment.apiPrefix}/bbs/personalCenter/getArticleListByType`, {params:{type: type}}).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }

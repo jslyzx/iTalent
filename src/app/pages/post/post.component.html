@@ -14,52 +14,35 @@
             </div>
         </li>
     </ul>
+    <ul class="weui-uploader__files" style="overflow: hidden;">
+        <li class="weui-uploader__file" *ngFor="let item of uploaderCover.queue" [weui-thumb]="item._file" (click)="onGallery(item)" [ngClass]="{ 'weui-uploader__file_status': item.isError }">
+            <div class="weui-uploader__file-content" *ngIf="item.isUploading">{{ item.progress }}%</div>
+            <div class="weui-uploader__file-content" *ngIf="item.isError">
+                <i class="weui-icon-warn"></i>
+            </div>
+        </li>
+    </ul>
     <div class="s-b clearfix">
         <i class="iconfont icon-tupian" (click)="triggerClick()"></i>
         <i class="iconfont icon-biaoqing"></i>
         <i class="iconfont icon-fujian"></i>
-        <!-- <mt-checklist v-model="checked" :options="['设置封面图']" class="fr">
-        </mt-checklist> -->
-        <!-- 样式处理一下 -->
-        <div class="weui-cells weui-cells_checkbox">
-            <label class="weui-cell weui-check__label" for="checkbox">
-                <div class="weui-cell__hd">
-                    <input type="checkbox" class="weui-check" name="setCover" id="checkbox" />
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>设置封面图</p>
-                </div>
-            </label>
-        </div>
+        <button class="cover fr" (click)="setCover()">设置封面图</button>
     </div>
     <div class="clearfix">
         <i class="iconfont icon-fenlei fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">选择模块</span>
-        <a (click)="chooseMk()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
+        <a (click)="chooseMk('auto')" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;">{{mkName}}</a>
     </div>
     <div class="clearfix" style="margin-top: 10px;">
         <i class="iconfont icon-at fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">提醒谁看</span>
         <a (click)="mention()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
     </div>
-    <!-- <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <div class="weui-uploader">
-                    <div class="weui-uploader__bd">
-                        <div class="weui-uploader__input-box">
-                            <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploader" />
-                        </div>
-                    </div>
-                </div>
-                <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
-            </div>
-        </div>
-    </div> -->
     <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
     <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploader" style="display: none;" #fileInput />
+    <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploaderCover" style="display: none;" #fileInputCover />
 
     <weui-toptips #toptips [text]="text" [type]="type"></weui-toptips>
     <weui-toast #success></weui-toast>
+    <weui-actionsheet #auto [menus]="menus" [config]="config"></weui-actionsheet>
 </div>

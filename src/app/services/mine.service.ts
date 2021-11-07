@@ -15,4 +15,12 @@ export class MineService {
   ) {
   }
 
+  getPersonalInfo(){
+    return this.http.get(`${environment.apiPrefix}/bbs/personalCenter/getInfo`).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }

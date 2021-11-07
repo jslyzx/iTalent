@@ -17,6 +17,7 @@ import {MessageComponent} from "./pages/message/message.component";
 import {CommentComponent} from "./pages/comment/comment.component";
 import {ArticleDetailComponent} from "./pages/article-detail/article-detail.component";
 import {MineComponent} from "./pages/mine/mine.component";
+import {ArticleListComponent} from "./pages/article-list/article-list.component";
 
 
 const routes: Routes = [
@@ -58,6 +59,11 @@ const routes: Routes = [
       {
         path: 'section/:sectionId',
         component: SectionComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'article-list/:type',
+        component: ArticleListComponent,
         pathMatch: 'full'
       },
       {

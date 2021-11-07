@@ -136,4 +136,12 @@ export class DocumentService {
     );
   }
 
+  getBanner() {
+    return this.http.get(`${environment.apiPrefix}/bbs/banner/ajaxList`).pipe(
+      map((result: any) => {
+        return result;
+      })
+    );
+  }
+
 }

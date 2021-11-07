@@ -1,4 +1,4 @@
-.section {
+.article-list {
     padding-bottom: 60px;
     background-color: #efeff4;
 
@@ -42,6 +42,17 @@
         background-color: #fff;
         padding: 10px 15px;
         overflow: hidden;
+    }
+
+    .has-cover{
+        width: 70%;
+    }
+    .no-cover{
+        width: 100%;
+    }
+    .cover{
+        height: 100px;
+        float: right;
     }
 
     .post .title {
@@ -98,15 +109,5 @@
         color: #00893D;
         font-size: 18px;
         margin-top: 10px;
-    }
-    .has-cover{
-        width: 70%;
-    }
-    .no-cover{
-        width: 100%;
-    }
-    .cover{
-        height: 100px;
-        float: right;
     }
 }

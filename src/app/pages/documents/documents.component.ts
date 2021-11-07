@@ -72,6 +72,8 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
 
     channels: any = [];
 
+    banner = [];
+
     images: any[] = [
         'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/5d6034a85edf8db18e821f720a23dd54564e7473.jpg',
         'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/5d6034a85edf8db18e821f720a23dd54564e7473.jpg',
@@ -177,7 +179,17 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
                 console.error(error);
             }
         );
-        
+        this.documentService.getBanner().subscribe(
+            (result: any) => {
+                const { code, data, message } = result;
+                if (code === 1) {
+                    this.banner = data;
+                }
+            },
+            error => {
+                console.error(error);
+            }
+        );
     }
 
     toSection(sectionId){

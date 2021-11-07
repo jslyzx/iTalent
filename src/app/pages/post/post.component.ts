@@ -6,6 +6,8 @@ import { Meta } from '@angular/platform-browser';
 import { DialogComponent, DialogConfig, PopupComponent } from "ngx-weui";
 import { LocalStorage } from "ngx-store";
 import * as _ from 'lodash';
+import { ActionSheetComponent, ActionSheetConfig, ActionSheetMenuItem, ActionSheetService } from 'ngx-weui/actionsheet';
+import { SkinType } from 'ngx-weui/core';
 import { Uploader, UploaderOptions } from 'ngx-weui/uploader';
 import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips';
 
@@ -25,13 +27,29 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
     @ViewChild('fileInput') fileInput: ElementRef;
 
+    @ViewChild('fileInputCover') fileInputCover: ElementRef;
+
     @ViewChild('toptips', { static: true }) toptips: ToptipsComponent;
+
+    @ViewChild('auto', { static: true }) autoAS: ActionSheetComponent;
 
     text = '';
 
     type: ToptipsType;
 
     hide;
+
+    mk;
+
+    mkName = '';
+
+    menus: ActionSheetMenuItem[] = [
+        { text: '分享', value: '1' },
+        { text: '提问', value: '2' }
+    ];
+    config: ActionSheetConfig = {
+        title: '选择模块'
+    } as ActionSheetConfig;
 
     constructor(private route: ActivatedRoute, private meta: Meta, private postService: PostService, private router: Router) {
         super();
@@ -97,6 +115,52 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
         }
     } as UploaderOptions);
 
+    uploaderCover: Uploader = new Uploader({
+        url: 'http://117.144.170.42:5555/bbs/file/uploadImg',
+        method: 'POST',
+        auto: true,
+        params: {
+            picList: {}
+        },
+        onFileQueued() {
+            console.log('onFileQueued', arguments);
+        },
+        onFileDequeued() {
+            console.log('onFileDequeued', arguments);
+        },
+        onStart() {
+            console.log('onStart', arguments);
+        },
+        onCancel() {
+            console.log('onCancel', arguments);
+        },
+        onFinished() {
+            console.log('onFinished', arguments);
+        },
+        onUploadStart() {
+            console.log('onUploadStart', arguments);
+        },
+        onUploadProgress() {
+            console.log('onUploadProgress', arguments);
+        },
+        onUploadSuccess(file, response) {
+            console.log('onUploadSuccess', arguments);
+            this.params.picList = { id: file.id, url: JSON.parse(response).data };
+        },
+        onUploadError() {
+            console.log('onUploadError', arguments);
+        },
+        onUploadComplete() {
+            console.log('onUploadComplete', arguments);
+        },
+        onUploadCancel() {
+            console.log('onUploadCancel', arguments);
+        },
+        onError() {
+            console.log('onError', arguments);
+        }
+    } as UploaderOptions);
+
     img: any;
     imgShow: boolean = false;
 
@@ -111,6 +175,12 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
         _.remove(this.uploader.options.params.picList, function(v) { return v.id === item.item.id });
     }
 
+    onDelCover(item: any) {
+        console.log(item);
+        this.uploaderCover.removeFromQueue(item.item);
+        this.uploader.options.params.picList = {};
+    }
+
     triggerClick() {
         this.fileInput.nativeElement.click();
     }
@@ -121,8 +191,8 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
             if (!this.title) {
                 this.text = '请输入标题！';
                 this.type = 'warn';
-                this.hide = function(){
-                  alert('fdf');
+                this.hide = function() {
+                    alert('fdf');
                 }
                 this.toptips.onShow();
                 return false;
@@ -135,10 +205,11 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
             }
             const self = this;
             this.postService.postArticle({
-              articleTitle: this.title,
-              articleContent: this.content,
-              articleImgs: _.map(this.uploader.options.params.picList,function(v){return v.url}).join(),
-              sectionId: this.sectionId
+                articleTitle: this.title,
+                articleContent: this.content,
+                articleImgs: _.map(this.uploader.options.params.picList, function(v) { return v.url }).join(),
+                coverImg: this.uploaderCover.options.params.picList.url,
+                sectionId: this.sectionId
             }).subscribe(
                 (result: any) => {
                     const { code, data, message } = result;
@@ -156,16 +227,28 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
         }
     }
 
-    chooseMk() {
-        // alert('选择模考');
+    chooseMk(type: SkinType) {
+        this.config.skin = type;
+        this.config = { ...this.config };
+        setTimeout(() => {
+            ((this as any)[`${type}AS`] as ActionSheetComponent).show().subscribe((res: any) => {
+                console.log('type', res);
+                this.mk = res.value;
+                this.mkName = res.text;
+            });
+        }, 10);
     }
 
     mention() {
 
     }
 
-    cancel(){
+    cancel() {
         history.go(-1);
+    }
+
+    setCover() {
+        this.fileInputCover.nativeElement.click();
     }
 
 }

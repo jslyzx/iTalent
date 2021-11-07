@@ -1,31 +1,31 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { BaseComponent } from '../base.component';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SectionService} from "../../services/section.service";
-import {DialogComponent, DialogConfig, DialogService, ToastComponent} from "ngx-weui";
+import {ArticleService} from "../../services/article.service";
 import {environment} from '../../../environments/environment';
+import {DialogComponent, DialogConfig, DialogService, ToastComponent} from "ngx-weui";
 
 @Component({
-  selector: 'app-section',
-  templateUrl: './section.component.html',
-  styleUrls: ['./section.component.scss']
+  selector: 'app-article-list',
+  templateUrl: './article-list.component.html',
+  styleUrls: ['./article-list.component.scss']
 })
-export class SectionComponent extends BaseComponent implements OnInit {
+export class ArticleListComponent extends BaseComponent implements OnInit {
 
-  sectionId;
+  type;
 
   list = [];
 
   staticPath = environment.staticApiPrefix;
 
   constructor(
-    private sectionService: SectionService,
+    private articleService: ArticleService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     super();
     this.route.paramMap.subscribe(params => {
-      this.sectionId = params.get('sectionId');
+      this.type = params.get('type');
       this.initData();
     });
   }
@@ -34,7 +34,7 @@ export class SectionComponent extends BaseComponent implements OnInit {
   }
 
   private initData() {
-    this.sectionService.getSectionFileList(this.sectionId).subscribe(
+    this.articleService.getArticleListByType(this.type).subscribe(
       (result: any) => {
         const {code, data, message} = result;
         if (code === 1) {
@@ -45,10 +45,6 @@ export class SectionComponent extends BaseComponent implements OnInit {
         console.log(error);
       }
     )
-  }
-
-  toPost(){
-    this.router.navigate([`/app/post/${this.sectionId}`]);
   }
 
   toDetail(articleId){
