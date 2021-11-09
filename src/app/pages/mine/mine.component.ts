@@ -24,7 +24,9 @@ export class MineComponent extends BaseComponent implements OnInit {
     userInfo;
     config: DialogConfig = {};
 
-    personalData;
+    personalData = {
+        chineseName: ''
+    };
 
     constructor(
         private route: ActivatedRoute,
@@ -48,7 +50,7 @@ export class MineComponent extends BaseComponent implements OnInit {
             (result: any) => {
                 const { code, data, message } = result;
                 if (code === 1) {
-                    this.personalData = data;
+                    this.personalData = data.companyUserSimple;
                 }
             },
             error => {
