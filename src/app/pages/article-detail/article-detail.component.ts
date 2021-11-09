@@ -81,4 +81,8 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
     this.router.navigate([`/app/comment/${this.articleId}`]);
   }
 
+  commentCom(id){
+    this.router.navigate([`/app/comment/${this.articleId}`], { queryParams: { commentId: id } });
+  }
+
 }

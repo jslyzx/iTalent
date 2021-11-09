@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   authApiPrefix: 'https://wx-account.schaefflercn.com',
-  apiPrefix: 'http://117.144.170.42:5555',
+  apiPrefix: 'http://localhost:82',
   staticApiPrefix: 'http://117.144.170.42:5555/bbs/',
   appName: 'italent',
   departmentId: 4,

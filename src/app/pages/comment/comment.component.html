@@ -26,6 +26,7 @@
         <i class="iconfont icon-gengxin fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">开启追更</span>
         <!-- <a (click)="chooseMk()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a> -->
+        <input class="weui-switch fr" type="checkbox" [(ngModel)]="chace" name="cho1" />
     </div>
     <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
     <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploader" style="display: none;" #fileInput />

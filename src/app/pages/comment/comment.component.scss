@@ -41,5 +41,13 @@
         background-color: #07A35A;
         border-color: #07A35A;
     }
+    .weui-switch, .weui-switch-cp__box{
+        width: 50px;
+        height: 25px;
+    }
+    .weui-switch:after, .weui-switch-cp__box:after{
+        width: 20px;
+        height: 20px;
+    }
 
 }

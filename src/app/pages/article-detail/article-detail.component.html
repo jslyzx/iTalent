@@ -19,12 +19,12 @@
                 <div class="comment clearfix" *ngFor="let comment of articleCommentList">
                     <img src="assets/images/avatar.jpg" class="avator fl">
                     <div class="fl" style="width: calc(100% - 64px);">
-                        <p class="c-n">{{comment.author}}</p>
-                        <p class="c-c">{{comment.content}}</p>
-                        <p class="time">{{comment.time}}</p>
+                        <p class="c-n">{{comment.createByName}}</p>
+                        <p class="c-c">{{comment.commentInfo}}</p>
+                        <p class="time">{{comment.createTime}}</p>
                         <div class="fr action">
-                            <i class="iconfont icon-pinglun"></i>
-                            <i class="iconfont icon-dianzan"></i>
+                            <i class="iconfont icon-pinglun" (click)="commentCom(comment.id)"></i>
+                            <!-- <i class="iconfont icon-dianzan"></i> -->
                         </div>
                     </div>
                 </div>

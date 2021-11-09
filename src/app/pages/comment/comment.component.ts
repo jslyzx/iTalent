@@ -21,6 +21,8 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
 
     articleId;
 
+    commentId;
+
     @ViewChild('fileInput') fileInput: ElementRef;
 
     @ViewChild('toptips', { static: true }) toptips: ToptipsComponent;
@@ -31,14 +33,20 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
 
     hide;
 
+    chace: false;
+
     constructor(private route: ActivatedRoute, private meta: Meta, private commentService: CommentService, private router: Router) {
         super();
         this.route.paramMap.subscribe(params => {
             this.articleId = params.get('articleId');
         });
+        this.route.queryParams.subscribe(param => {
+          this.commentId = param.commentId
+        });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 
     ngOnDestroy(): void {
         this.meta.updateTag({
@@ -125,6 +133,7 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
             const self = this;
             this.commentService.postComment({
               articleId: this.articleId,
+              commentId: this.commentId,
               commentInfo: this.content,
               articleCommentImgs: _.map(this.uploader.options.params.picList,function(v){return v.url}).join()
             }).subscribe(
