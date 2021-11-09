@@ -40,7 +40,7 @@ export class ArticleService {
   }
 
   cancelOperate(articleId, type){
-    return this.http.post(`${environment.apiPrefix}/bbs/articleOperation/cancelOperate`, {id: articleId, operationType: type}).pipe(
+    return this.http.post(`${environment.apiPrefix}/bbs/articleOperation/cancelOperate`, {articleId: articleId, operationType: type}).pipe(
       map((result: any) => {
         return result;
       }),
