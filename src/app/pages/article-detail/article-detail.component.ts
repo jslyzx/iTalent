@@ -20,8 +20,16 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
   articleCommentList;
   articleId;
   articleImgList;
+  articleCollectNum = 0;
+  articleCommentNum = 0;
+  articleLikeNum = 0;
+  articleForwardNum = 0;
   moreLinks = ['软件开发的误区', '软件专业就业现状'];
   otherArticles =  ['工程师的那些事'];
+
+  isCollect = false;
+  isForward = false;
+  isLike = false;
 
   @LocalStorage()
   lang;
@@ -62,6 +70,13 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
             this.article = data.article;
             this.articleCommentList = data.articleCommentList;
             this.articleImgList = data.articleImgList;
+            this.articleLikeNum = data.articleLikeNum;
+            this.articleCollectNum = data.articleCollectNum;
+            this.articleCommentNum = data.articleCommentNum;
+            this.articleForwardNum = data.articleForwardNum;
+            this.isCollect = data.isCollect;
+            this.isForward = data.isForward;
+            this.isLike = data.isLike;
           }
         },
         (error) => {
@@ -73,16 +88,96 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
 
   }
 
-  like(){
-    return false;
-  }
-
   comment(){
     this.router.navigate([`/app/comment/${this.articleId}`]);
   }
 
   commentCom(id){
     this.router.navigate([`/app/comment/${this.articleId}`], { queryParams: { commentId: id } });
+  }
+
+  toggleCollect(articleId){
+    if(this.isCollect){
+      this.articleService.cancelOperate(articleId, 1).subscribe(
+        (result: any) => {
+          const {data, code, message} = result;
+          if (code === 1) {
+            this.isCollect = false;
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }else{
+      this.articleService.operateArticle(articleId, 1).subscribe(
+        (result: any) => {
+          const {data, code, message} = result;
+          if (code === 1) {
+            this.isCollect = true;
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  toggleForward(articleId){
+    if(this.isForward){
+      this.articleService.cancelOperate(articleId, 2).subscribe(
+        (result: any) => {
+          const {data, code, message} = result;
+          if (code === 1) {
+            this.isForward = false;
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }else{
+      this.articleService.operateArticle(articleId, 2).subscribe(
+        (result: any) => {
+          const {data, code, message} = result;
+          if (code === 1) {
+            this.isForward = true;
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  toggleLike(articleId){
+    if(this.isLike){
+      this.articleService.cancelOperate(articleId, 3).subscribe(
+        (result: any) => {
+          const {data, code, message} = result;
+          if (code === 1) {
+            this.isLike = false;
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }else{
+      this.articleService.operateArticle(articleId, 3).subscribe(
+        (result: any) => {
+          const {data, code, message} = result;
+          if (code === 1) {
+            this.isLike = true;
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
 
 }

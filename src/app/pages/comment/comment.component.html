@@ -14,23 +14,40 @@
     </ul>
     <div class="s-b clearfix">
         <i class="iconfont icon-tupian" (click)="triggerClick()"></i>
-        <i class="iconfont icon-biaoqing"></i>
+        <i class="iconfont icon-biaoqing" (click)="toggleEmoji()"></i>
     </div>
-    
+    <div *ngIf="isshow" style="float: left;z-index: 500;background-color: white;margin-bottom: 55px">
+        <hr style="margin-top: 0px;margin-bottom: 10px"/>
+        <ul style="list-style: none;padding-left: 0px;padding-bottom: 0px">
+          <li *ngFor="let item of emoji" style="float: left;margin-left: 5px;margin-right: 5px;margin-bottom: 10px">
+            <span (click)="addemoji(item.emoji)" style="font-size: 20px">{{item.emoji}}</span>
+          </li>
+        </ul>
+    </div>
     <div class="clearfix" style="margin-top: 10px;font-size:17px;line-height: 21px;">
         <i class="iconfont icon-at fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">提醒谁看</span>
         <a (click)="mention()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
     </div>
+    <div class="at-name" *ngFor="let user of remindUser">@{{user.username}}</div>
     <div class="clearfix" style="margin-top: 10px;font-size:17px;line-height: 21px;">
         <i class="iconfont icon-gengxin fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">开启追更</span>
         <!-- <a (click)="chooseMk()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a> -->
-        <input class="weui-switch fr" type="checkbox" [(ngModel)]="chace" name="cho1" />
+        <input class="weui-switch fr" type="checkbox" [(ngModel)]="chace" />
     </div>
     <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
     <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploader" style="display: none;" #fileInput />
 
     <weui-toptips #toptips [text]="text" [type]="type"></weui-toptips>
     <weui-toast #success></weui-toast>
+
+    <div class="mask" [ngClass]="{'show': chooseUser}"></div>
+    <div class="choose-wrap" [ngClass]="{'show': chooseUser}">
+        <div class="title">选择提醒的人</div>
+        <weui-searchbar (search)="onSearch($event)" (submit)="dealSearch($event)"></weui-searchbar>
+        <ul class="list">
+            <li class="user" *ngFor="let user of userList" (click)="onChooseUser(user)">{{user.username}}</li>
+        </ul>
+    </div>
 </div>

@@ -15,4 +15,12 @@ export class MessageService {
   ) {
   }
 
+  getUserList(userName) {
+    return this.http.get(`${environment.apiPrefix}/bbs/message/getUserList`, {params:{userName: userName}}).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }

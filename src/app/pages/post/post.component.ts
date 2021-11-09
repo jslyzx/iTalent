@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input, Elem
 import { BaseComponent } from '../base.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
+import { MessageService } from '../../services/message.service';
 import { Meta } from '@angular/platform-browser';
 import { DialogComponent, DialogConfig, PopupComponent } from "ngx-weui";
 import { LocalStorage } from "ngx-store";
@@ -10,6 +11,7 @@ import { ActionSheetComponent, ActionSheetConfig, ActionSheetMenuItem, ActionShe
 import { SkinType } from 'ngx-weui/core';
 import { Uploader, UploaderOptions } from 'ngx-weui/uploader';
 import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips';
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-post',
@@ -21,9 +23,11 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
     public title: any;
 
-    public content: any;
+    content = '';
 
     sectionId;
+
+    isshow = false;
 
     @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -32,6 +36,10 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     @ViewChild('toptips', { static: true }) toptips: ToptipsComponent;
 
     @ViewChild('auto', { static: true }) autoAS: ActionSheetComponent;
+
+    apiPath = environment.apiPrefix;
+
+    emoji = [{id: 1, emoji: '😁'},{id: 2, emoji: '😂'},{id: 3, emoji: '😃'},{id: 4, emoji: '😄'},{id: 5, emoji: '👿'},{id: 6, emoji: '😉'},{id: 7, emoji: '😊'},{id: 8, emoji: '😌'},{id: 9, emoji: '😍'},{id: 10, emoji: '😏'},{id: 11, emoji: '😒'},{id: 12, emoji: '😓'},{id: 13, emoji: '😔'},{id: 14, emoji: '😖'},{id: 15, emoji: '😘'},{id: 16, emoji: '😚'},{id: 17, emoji: '😜'},{id: 18, emoji: '😝'},{id: 19, emoji: '😞'},{id: 20, emoji: '😠'},{id: 21, emoji: '😡'},{id: 22, emoji: '😢'},{id: 23, emoji: '😣'},{id: 24, emoji: '😥'},{id: 25, emoji: '😨'},{id: 26, emoji: '😪'},{id: 27, emoji: '😭'},{id: 28, emoji: '😰'},{id: 29, emoji: '😱'},{id: 30, emoji: '😲'},{id: 31, emoji: '😳'},{id: 32, emoji: '😷'},{id: 33, emoji: '🙃'},{id: 34, emoji: '😋'},{id: 35, emoji: '😗'},{id: 36, emoji: '😛'},{id: 37, emoji: '🤑'},{id: 38, emoji: '🤓'},{id: 39, emoji: '😎'},{id: 40, emoji: '🤗'},{id: 41, emoji: '🙄'},{id: 42, emoji: '🤔'},{id: 43, emoji: '😩'},{id: 44, emoji: '😤'},{id: 45, emoji: '🤐'},{id: 46, emoji: '🤒'}];
 
     text = '';
 
@@ -43,6 +51,12 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
     mkName = '';
 
+    userList = [];
+
+    remindUser = [];
+
+    outUrl = '';
+
     menus: ActionSheetMenuItem[] = [
         { text: '分享', value: '1' },
         { text: '提问', value: '2' }
@@ -51,14 +65,26 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
         title: '选择模块'
     } as ActionSheetConfig;
 
-    constructor(private route: ActivatedRoute, private meta: Meta, private postService: PostService, private router: Router) {
+    chooseUser = false;
+
+    searchText;
+
+    constructor(
+        private route: ActivatedRoute, 
+        private meta: Meta, 
+        private postService: PostService, 
+        private router: Router,
+        private messageService: MessageService) 
+    {
         super();
         this.route.paramMap.subscribe(params => {
             this.sectionId = params.get('sectionId');
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        
+    }
 
     ngOnDestroy(): void {
         this.meta.updateTag({
@@ -70,7 +96,7 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     uploader: Uploader = new Uploader({
-        url: 'http://117.144.170.42:5555/bbs/file/uploadImg',
+        url: this.apiPath + '/bbs/file/uploadImg',
         method: 'POST',
         auto: true,
         params: {
@@ -116,7 +142,7 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     } as UploaderOptions);
 
     uploaderCover: Uploader = new Uploader({
-        url: 'http://117.144.170.42:5555/bbs/file/uploadImg',
+        url: this.apiPath + '/bbs/file/uploadImg',
         method: 'POST',
         auto: true,
         params: {
@@ -209,7 +235,9 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
                 articleContent: this.content,
                 articleImgs: _.map(this.uploader.options.params.picList, function(v) { return v.url }).join(),
                 coverImg: this.uploaderCover.options.params.picList.url,
-                sectionId: this.sectionId
+                sectionId: this.sectionId,
+                outUrl: this.outUrl,
+                remindUser: _.map(this.remindUser, function(v) { return v.empNo }).join()
             }).subscribe(
                 (result: any) => {
                     const { code, data, message } = result;
@@ -240,7 +268,7 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     mention() {
-
+        this.chooseUser = true;
     }
 
     cancel() {
@@ -249,6 +277,39 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
     setCover() {
         this.fileInputCover.nativeElement.click();
+    }
+
+    onSearch(term: string) {
+        this.searchText = term;
+    }
+
+    dealSearch(value: string) {
+        this.messageService.getUserList(value).subscribe(
+            (result: any) => {
+                const { code, data, message } = result;
+                if (code == 1) {
+                    this.userList = data;
+                }
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
+
+    onChooseUser(user){
+        if(_.findIndex(this.remindUser, function(v){return v === user}) === -1){
+            this.remindUser.push(user);
+        }
+        this.chooseUser = false;
+    }
+
+    addemoji(emoji){
+      this.content = this.content + emoji
+    }
+
+    toggleEmoji(){
+        this.isshow = !this.isshow;
     }
 
 }

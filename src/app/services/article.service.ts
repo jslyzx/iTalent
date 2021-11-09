@@ -31,4 +31,20 @@ export class ArticleService {
     );
   }
 
+  operateArticle(articleId, type){
+    return this.http.post(`${environment.apiPrefix}/bbs/articleOperation/save`, {articleId: articleId, operationType: type}).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
+  cancelOperate(articleId, type){
+    return this.http.post(`${environment.apiPrefix}/bbs/articleOperation/cancelOperate`, {id: articleId, operationType: type}).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }

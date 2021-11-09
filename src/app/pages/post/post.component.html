@@ -24,9 +24,25 @@
     </ul>
     <div class="s-b clearfix">
         <i class="iconfont icon-tupian" (click)="triggerClick()"></i>
-        <i class="iconfont icon-biaoqing"></i>
-        <i class="iconfont icon-fujian"></i>
+        <i class="iconfont icon-biaoqing" (click)="toggleEmoji()"></i>
+        <!-- <i class="iconfont icon-fujian"></i> -->
         <button class="cover fr" (click)="setCover()">设置封面图</button>
+    </div>
+    <div *ngIf="isshow" style="float: left;z-index: 500;background-color: white;margin-bottom: 55px">
+        <hr style="margin-top: 0px;margin-bottom: 10px"/>
+        <ul style="list-style: none;padding-left: 0px;padding-bottom: 0px">
+          <li *ngFor="let item of emoji" style="float: left;margin-left: 5px;margin-right: 5px;margin-bottom: 10px">
+            <span (click)="addemoji(item.emoji)" style="font-size: 20px">{{item.emoji}}</span>
+          </li>
+        </ul>
+    </div>
+    <div class="weui-cells weui-cells_form" style="float: none;">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label" style="width: 80px;">外部链接</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" [(ngModel)]="outUrl" name="outUrl" placeholder="请输入外部链接" style="margin-bottom: 0;" />
+            </div>
+        </div>
     </div>
     <div class="clearfix">
         <i class="iconfont icon-fenlei fl" style="color: #646464;"></i>
@@ -38,11 +54,19 @@
         <span class="fl" style="margin-left: 20px;color: #646464;">提醒谁看</span>
         <a (click)="mention()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>
     </div>
+    <div class="at-name" *ngFor="let user of remindUser">@{{user.username}}</div>
     <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
     <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploader" style="display: none;" #fileInput />
     <input class="weui-uploader__input" type="file" accept="image/*" multiple [weui-uploader-file]="uploaderCover" style="display: none;" #fileInputCover />
-
     <weui-toptips #toptips [text]="text" [type]="type"></weui-toptips>
     <weui-toast #success></weui-toast>
     <weui-actionsheet #auto [menus]="menus" [config]="config"></weui-actionsheet>
+    <div class="mask" [ngClass]="{'show': chooseUser}"></div>
+    <div class="choose-wrap" [ngClass]="{'show': chooseUser}">
+        <div class="title">选择提醒的人</div>
+        <weui-searchbar (search)="onSearch($event)" (submit)="dealSearch($event)"></weui-searchbar>
+        <ul class="list">
+            <li class="user" *ngFor="let user of userList" (click)="onChooseUser(user)">{{user.username}}</li>
+        </ul>
+    </div>
 </div>

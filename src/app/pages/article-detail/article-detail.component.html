@@ -31,10 +31,10 @@
                 <p class="view-more">查看全部评论 <span class="mui-icon mui-icon-arrowright" style="font-size: 16px;"></span></p>
             </div>
             <div class="info">
-                <span v-if="post.z"><i class="iconfont icon-dianzan"></i>{{article.likeNumber}}</span>
-                <span v-if="post.pl"><i class="iconfont icon-pinglun"></i>{{article.commentNumber}}</span>
-                <span v-if="post.zf"><i class="iconfont icon-zhuanfa"></i>{{article.forwardNumber}}</span>
-                <span v-if="post.sc"><i class="iconfont icon-shoucang"></i>{{article.collectNumber}}</span>
+                <span v-if="post.z"><i class="iconfont icon-dianzan"></i>{{articleLikeNum}}</span>
+                <span v-if="post.pl"><i class="iconfont icon-pinglun"></i>{{articleCommentNum}}</span>
+                <span v-if="post.zf"><i class="iconfont icon-zhuanfa"></i>{{articleForwardNum}}</span>
+                <span v-if="post.sc"><i class="iconfont icon-shoucang"></i>{{articleCollectNum}}</span>
             </div>
             <div class="links">
                 <div class="fl">或许你还想看：</div>
@@ -51,7 +51,7 @@
         </div>
     </div>
     <nav class="mui-bar mui-bar-tab" style="z-index: 999">
-        <a class="mui-tab-item" (click)="like()">
+        <a class="mui-tab-item" (click)="toggleLike(article.id)" [ngClass]="{'active': isLike}">
             <span class="mui-tab-label"><i class="iconfont icon-dianzan"></i>点赞</span>
             <span class="split"></span>
         </a>
@@ -59,11 +59,11 @@
             <span class="mui-tab-label"><i class="iconfont icon-pinglun"></i>评论</span>
             <span class="split"></span>
         </a>
-        <a class="mui-tab-item">
+        <a class="mui-tab-item" (click)="toggleForward(article.id)" [ngClass]="{'active': isForward}">
             <span class="mui-tab-label"><i class="iconfont icon-zhuanfa"></i>转发</span>
             <span class="split"></span>
         </a>
-        <a class="mui-tab-item">
+        <a class="mui-tab-item" (click)="toggleCollect(article.id)" [ngClass]="{'active': isCollect}">
             <span class="mui-tab-label"><i class="iconfont icon-shoucang"></i>收藏</span>
             <span class="split" style="position: relative;left: 99999px;"></span>
         </a>
