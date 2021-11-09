@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { Uploader, UploaderOptions } from 'ngx-weui/uploader';
 import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips';
 import { MessageService } from '../../services/message.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-comment',
@@ -37,6 +38,8 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
     hide;
 
     chace: false;
+
+    accessToken = environment.accessToken;
 
     userList = [];
 
@@ -69,6 +72,7 @@ export class CommentComponent extends BaseComponent implements OnInit, OnDestroy
     uploader: Uploader = new Uploader({
         url: 'http://117.144.170.42:5555/bbs/file/uploadImg',
         method: 'POST',
+        headers: [{ name: 'Authorization', value: 'Bearer ' + this.accessToken }],
         auto: true,
         params: {
             picList: []
