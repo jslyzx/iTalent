@@ -73,8 +73,6 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
 
     channels: any = [];
 
-    banner = [];
-
     staticPath = environment.staticApiPrefix;
 
     images: any[] = [{bannerImg: 'uploadImg/Motiv_B.I1.jpg'},{bannerImg: 'uploadImg/Motiv_D.I.2.jpg'},{bannerImg: 'uploadImg/Motiv_D.III.2.jpg'},{bannerImg: 'uploadImg/Motiv_H.I.2.jpg'}];
@@ -101,36 +99,6 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
         private toastService: ToastService,
     ) {
         super();
-        this.lang = this.translate.currentLang;
-        this.router.events.subscribe((event: any) => {
-            if (event instanceof NavigationStart) {
-                // Show loading indicator
-            }
-
-            // if (event instanceof NavigationEnd) {
-            //     // Hide loading indicator
-            //     this.categoryId = event.url.split('/')[event.url.split('/').length - 1]
-            //     if (this.categoryId === 'dashboard') {
-            //         if (this.documentsCategory.length > 0) {
-            //             this.categoryId = this.documentsCategory[0].id;
-            //         }
-            //     }
-            //     this.onFilterCategory({ id: this.categoryId });
-            //     if (this.documentsCategory instanceof Array) {
-            //         _.map(this.documentsCategory, (category, index) => {
-            //             if (this.categoryId == category.id) {
-            //                 this.selected = index;
-            //             }
-            //         })
-            //     }
-            // }
-        });
-        // this.route.paramMap.subscribe(params => {
-        //   this.categoryId = params.get('categoryId');
-        //   if (this.categoryId) {
-        //     this.onFilterCategory({id: this.categoryId});
-        //   }
-        // });
     }
 
     ngOnInit(): void {
@@ -186,17 +154,6 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
             },
             error => {
                 this.tags = [];
-                console.error(error);
-            }
-        );
-        this.documentService.getBanner().subscribe(
-            (result: any) => {
-                const { code, data, message } = result;
-                if (code === 1) {
-                    this.banner = data;
-                }
-            },
-            error => {
                 console.error(error);
             }
         );

@@ -18,6 +18,7 @@ import {CommentComponent} from "./pages/comment/comment.component";
 import {ArticleDetailComponent} from "./pages/article-detail/article-detail.component";
 import {MineComponent} from "./pages/mine/mine.component";
 import {ArticleListComponent} from "./pages/article-list/article-list.component";
+import {MyFocusComponent} from "./pages/my-focus/my-focus.component";
 
 
 const routes: Routes = [
@@ -99,6 +100,10 @@ const routes: Routes = [
       {
         path: 'article/:articleId',
         component: ArticleDetailComponent
+      },
+      {
+        path: 'my/focus',
+        component: MyFocusComponent
       },
       {path: '**', component: DashboardComponent},
     ],

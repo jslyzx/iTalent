@@ -1,0 +1,24 @@
+<div class="my-focus">
+    <div class="content clearfix">
+        <div class="item" *ngFor="let channel of channels" (click)="toSection(channel.id)">
+            <img [src]="staticPath + channel.sectionImg" alt="">
+            <div class="front">
+                {{channel.sectionName}}
+            </div>
+        </div>
+    </div>
+    <nav class="mui-bar mui-bar-tab" style="z-index: 999">
+        <a class="mui-tab-item" [routerLink]="['/app/documents']">
+            <i class="iconfont icon-shouye"></i>
+            <span class="mui-tab-label">首页</span>
+        </a>
+        <a class="mui-tab-item" [routerLink]="['/app/message']">
+            <i class="iconfont icon-xiaoxin"></i>
+            <span class="mui-tab-label">消息</span>
+        </a>
+        <a class="mui-tab-item" [routerLink]="['/app/mine']">
+            <i class="iconfont icon-woden"></i>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </nav>
+</div>

@@ -1,0 +1,62 @@
+.my-focus {
+
+    .content {
+        background-color: #fff;
+        margin: 12px;
+        margin-bottom: 70px;
+    }
+
+    .content .item {
+        float: left;
+        margin: 12px 0 12px;
+        height: 100px;
+        position: relative;
+        width: calc(50% - 18px);
+        margin-left: 12px;
+        position: relative;
+    }
+
+    .img .iconfont {
+        font-size: 30px;
+        vertical-align: middle;
+        margin-left: 20px;
+    }
+
+    .item .title {
+        line-height: 75px;
+        font-size: 18px;
+        margin-left: 4px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .item img {
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .item .front {
+        position: absolute;
+        z-index: 99;
+        top: calc(50% - 40px);
+        left: calc(50% - 40px);
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 80px;
+        background-color: rgba(255, 255, 255, .5);
+        color: #000;
+        font-weight: bold;
+        line-height: 80px;
+    }
+
+    .front .iconfont {
+        font-size: 20px;
+    }
+}

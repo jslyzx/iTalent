@@ -63,4 +63,8 @@ export class MineComponent extends BaseComponent implements OnInit {
         this.router.navigate([`/app/article-list/${type}`]);
     }
 
+    myFocus(){
+        this.router.navigate([`/app/my/focus`]);
+    }
+
 }

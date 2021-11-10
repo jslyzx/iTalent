@@ -48,7 +48,7 @@ export class SectionComponent extends BaseComponent implements OnInit {
   }
 
   private initData() {
-    this.sectionService.getSectionFileList(this.sectionId).subscribe(
+    this.sectionService.getSectionFileList(this.sectionId, this.moduleId).subscribe(
       (result: any) => {
         const {code, data, message} = result;
         if (code === 1) {
