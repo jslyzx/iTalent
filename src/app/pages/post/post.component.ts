@@ -11,7 +11,7 @@ import { ActionSheetComponent, ActionSheetConfig, ActionSheetMenuItem, ActionShe
 import { SkinType } from 'ngx-weui/core';
 import { Uploader, UploaderOptions } from 'ngx-weui/uploader';
 import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-post',
@@ -49,8 +49,6 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
     hide;
 
-    mk;
-
     mkName = '';
 
     userList = [];
@@ -59,10 +57,8 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
 
     outUrl = '';
 
-    menus: ActionSheetMenuItem[] = [
-        { text: '分享', value: '1' },
-        { text: '提问', value: '2' }
-    ];
+    menus: ActionSheetMenuItem[];
+
     config: ActionSheetConfig = {
         title: '选择模块'
     } as ActionSheetConfig;
@@ -70,6 +66,10 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     chooseUser = false;
 
     searchText;
+
+    moduleList = [];
+
+    moduleId;
 
     constructor(
         private route: ActivatedRoute, 
@@ -85,7 +85,22 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        
+        this.postService.getModuleList().subscribe(
+            (result: any) => {
+                const { code, data, message } = result;
+                if (code == 1) {
+                    this.menus = _.map(data,function(v){
+                        return {
+                            text: v.name,
+                            value: v.id
+                        }
+                    })
+                }
+            },
+            error => {
+                console.error(error);
+            }
+        );
     }
 
     ngOnDestroy(): void {
@@ -241,7 +256,8 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
                 coverImg: this.uploaderCover.options.params.picList.url,
                 sectionId: this.sectionId,
                 outUrl: this.outUrl,
-                remindUser: _.map(this.remindUser, function(v) { return v.empNo }).join()
+                remindUser: _.map(this.remindUser, function(v) { return v.empNo }).join(),
+                moduleId: this.moduleId
             }).subscribe(
                 (result: any) => {
                     const { code, data, message } = result;
@@ -265,7 +281,7 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
         setTimeout(() => {
             ((this as any)[`${type}AS`] as ActionSheetComponent).show().subscribe((res: any) => {
                 console.log('type', res);
-                this.mk = res.value;
+                this.moduleId = res.value;
                 this.mkName = res.text;
             });
         }, 10);

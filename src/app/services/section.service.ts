@@ -15,8 +15,8 @@ export class SectionService {
   ) {
   }
 
-  getSectionFileList(sectionId) {
-    return this.http.get(`${environment.apiPrefix}/bbs/article/ajaxList`, {params:{sectionId: sectionId}}).pipe(
+  getSectionFileList(sectionId, moduleId) {
+    return this.http.get(`${environment.apiPrefix}/bbs/article/ajaxList`, {params:{sectionId: sectionId, moduleId: moduleId}}).pipe(
       map((result: any) => {
         return result;
       }),

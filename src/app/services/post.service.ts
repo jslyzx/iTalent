@@ -23,4 +23,12 @@ export class PostService {
     );
   }
 
+  getModuleList(){
+    return this.http.get(`${environment.apiPrefix}/bbs/bbsModule/ajaxList`).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }
