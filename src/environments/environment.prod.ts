@@ -1,8 +1,8 @@
 export const environment = {
   production: false,
   authApiPrefix: 'https://wx-account.schaefflercn.com',
-  apiPrefix: 'http://localhost:82',
-  staticApiPrefix: 'http://localhost:82/bbs/',
+  apiPrefix: 'http://117.144.170.42:4300',
+  staticApiPrefix: 'http://117.144.170.42:4300/bbs/',
   appName: 'italent',
   departmentId: 4,
   linkHRConsulting: 'https://schaeffler.udesk.cn/im_client/?web_plugin_id=103891',

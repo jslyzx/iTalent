@@ -3,7 +3,7 @@
         <div class="mui-input-row mui-search">
             <input type="search" class="mui-input-clear" placeholder="搜索">
         </div>
-        <div class="list">
+        <div class="list" *ngIf="list && list.length">
             <div class="message clearfix" *ngFor="let v of list;let i = index">
                 <img [src]="v.avatar" alt="" class="fl avatar">
                 <div class="fr info">
@@ -11,6 +11,9 @@
                     <p class="content">{{v.content}}</p>
                 </div>
             </div>
+        </div>
+        <div class="empty" *ngIf="!list || list.length === 0" style="text-align: center;">
+            <img src="assets/images/no-data.png" alt="" style="width: 50%;margin: 10px auto;display: block;">
         </div>
     </div>
     <nav class="mui-bar mui-bar-tab" style="z-index: 999">

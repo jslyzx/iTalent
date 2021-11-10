@@ -77,8 +77,7 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
 
     staticPath = environment.staticApiPrefix;
 
-    images: any[] = [
-    ];
+    images: any[] = [{bannerImg: 'uploadImg/Motiv_B.I1.jpg'},{bannerImg: 'uploadImg/Motiv_D.I.2.jpg'},{bannerImg: 'uploadImg/Motiv_D.III.2.jpg'},{bannerImg: 'uploadImg/Motiv_H.I.2.jpg'}];
 
     totalCount = 0;
     currentPage = 1;

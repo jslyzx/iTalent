@@ -1,7 +1,7 @@
 <div class="section">
     <div class="top">
         <div class="clearfix">
-            <div class="mui-input-row mui-search fl">
+            <div class="mui-input-row mui-search fl" style="width: calc(100% - 80px);">
                 <input type="search" class="mui-input-clear" placeholder="软件工程师">
             </div>
             <button type="button" class="mui-btn mui-icon mui-icon-plusempty fr" style="background-color: #00893D;color: #fff;" (click)="notice()">关注</button>
@@ -13,7 +13,7 @@
             <div class="nav">分享</div>
         </div>
     </div>
-    <div class="main">
+    <div class="main" *ngIf="list && list.length">
         <div class="post" *ngFor="let p of list" (click)="toDetail(p.id)">
             <h3 class="title">{{p.articleTitle}}</h3>
             <div class="fl" [ngClass]="{'has-cover': p.coverImg, 'no-cover': !p.coverImg}">
@@ -35,6 +35,9 @@
                 <img [src]="staticPath + p.coverImg" alt="" class="cover">
             </div>
         </div>
+    </div>
+    <div class="empty" *ngIf="!list || list.length === 0" style="text-align: center;">
+        <img src="assets/images/no-data.png" alt="" style="width: 50%;margin: 10px auto;display: block;">
     </div>
     <div class="block" (click)="toPost()">
         <i class="iconfont icon-fatie"></i>

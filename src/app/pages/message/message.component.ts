@@ -3,6 +3,7 @@ import { BaseComponent } from '../base.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-message',
@@ -12,24 +13,13 @@ import * as _ from 'lodash';
 })
 export class MessageComponent extends BaseComponent implements OnInit {
 
-    list: any[] = [{
-        avatar: '../img/avatar.jpg',
-        name: '软件社区',
-        content: '您关注的软件社区发布了新的帖子'
-    }, {
-        avatar: '../img/avatar.jpg',
-        name: '材料社区',
-        content: '您关注的材料社区发布了新的帖子'
-    }, {
-        avatar: '../img/avatar.jpg',
-        name: '仿真社区',
-        content: '您关注的仿真社区发布了新的帖子'
-    }];
+    list: any[] = [];
 
 
     constructor(
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private messageService: MessageService
     ) {
         super();
     }
@@ -38,5 +28,17 @@ export class MessageComponent extends BaseComponent implements OnInit {
         this.initData();
     }
 
-    private initData() {}
+    private initData() {
+        this.messageService.getMyList().subscribe(
+            (result: any) => {
+                const { code, data, message } = result;
+                if (code == 1) {
+                    this.list = data;
+                }
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
 }

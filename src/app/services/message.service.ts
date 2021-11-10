@@ -23,4 +23,12 @@ export class MessageService {
     );
   }
 
+  getMyList(){
+    return this.http.post(`${environment.apiPrefix}/bbs/message/getMyList`, null).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }
