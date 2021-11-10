@@ -8,6 +8,11 @@ import * as base64 from 'base-64';
 import * as _ from 'lodash';
 import {DialogComponent, DialogConfig, PopupComponent} from "ngx-weui";
 import {TranslateService} from "@ngx-translate/core";
+import {environment} from '../../../environments/environment';
+import {EventBusService} from 'ngx-eventbus';
+import {WXService} from '../../services/wx.service';
+
+declare var wx: any;
 
 @Component({
   selector: 'app-article-detail',
@@ -38,6 +43,8 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
   userInfo;
   config: DialogConfig = {};
 
+  staticPath = environment.staticApiPrefix;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -45,9 +52,12 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
     private meta: Meta,
     private appTitle: Title,
     private domSanitizer: DomSanitizer,
+    private eventBusService: EventBusService,
+    private wxService: WXService
   ) {
     super();
     console.info(this.userInfo);
+    this.wxService.config({});
   }
 
 
@@ -125,31 +135,27 @@ export class ArticleDetailComponent extends BaseComponent implements OnInit {
   }
 
   toggleForward(articleId){
-    if(this.isForward){
-      this.articleService.cancelOperate(articleId, 2).subscribe(
-        (result: any) => {
-          const {data, code, message} = result;
-          if (code === 1) {
-            this.isForward = false;
-          }
-        },
-        (error) => {
-          console.error(error);
+    wx.ready(() => {
+      wx.onMenuShareTimeline({
+        title: this.article.articleTitle,
+        link: window.location.href,
+        imgUrl: '',
+        success: function(){
+          this.articleService.operateArticle(articleId, 2).subscribe(
+            (result: any) => {
+              const {data, code, message} = result;
+              if (code === 1) {
+                this.isForward = true;
+              }
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
         }
-      );
-    }else{
-      this.articleService.operateArticle(articleId, 2).subscribe(
-        (result: any) => {
-          const {data, code, message} = result;
-          if (code === 1) {
-            this.isForward = true;
-          }
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
+      });
+    });
+    
   }
 
   toggleLike(articleId){

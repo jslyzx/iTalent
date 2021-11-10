@@ -1,7 +1,10 @@
 <div class="section">
     <div class="top">
-        <div class="mui-input-row mui-search">
-            <input type="search" class="mui-input-clear" placeholder="软件工程师">
+        <div class="clearfix">
+            <div class="mui-input-row mui-search fl">
+                <input type="search" class="mui-input-clear" placeholder="软件工程师">
+            </div>
+            <button type="button" class="mui-btn mui-icon mui-icon-plusempty fr" style="background-color: #00893D;color: #fff;" (click)="notice()">关注</button>
         </div>
         <div class="navbar clearfix">
             <div class="nav active">置顶</div>
@@ -51,4 +54,6 @@
             <span class="mui-tab-label">我的</span>
         </a>
     </nav>
+
+    <weui-toast #success></weui-toast>
 </div>

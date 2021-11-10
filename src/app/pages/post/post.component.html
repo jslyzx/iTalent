@@ -38,18 +38,18 @@
     </div>
     <div class="weui-cells weui-cells_form" style="float: none;">
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label class="weui-label" style="width: 80px;">外部链接</label></div>
+            <div class="weui-cell__hd"><label class="weui-label" style="width: 80px;">插入链接</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" type="text" [(ngModel)]="outUrl" name="outUrl" placeholder="请输入外部链接" style="margin-bottom: 0;" />
             </div>
         </div>
     </div>
-    <div class="clearfix">
+    <div class="clearfix" style="margin-top: 10px;">
         <i class="iconfont icon-fenlei fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">选择模块</span>
         <a (click)="chooseMk('auto')" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;">{{mkName}}</a>
     </div>
-    <div class="clearfix" style="margin-top: 10px;">
+    <div class="clearfix" style="margin-top: 20px;">
         <i class="iconfont icon-at fl" style="color: #646464;"></i>
         <span class="fl" style="margin-left: 20px;color: #646464;">提醒谁看</span>
         <a (click)="mention()" class="mui-icon mui-icon-arrowright fr" style="color: #646464;font-size: 16px;"></a>

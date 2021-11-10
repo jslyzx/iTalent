@@ -20,6 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from "../../services/auth.service";
 import { MatTabGroup } from "@angular/material/tabs";
 import { Title } from "@angular/platform-browser";
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-documents',
@@ -74,10 +75,9 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
 
     banner = [];
 
+    staticPath = environment.staticApiPrefix;
+
     images: any[] = [
-        'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/5d6034a85edf8db18e821f720a23dd54564e7473.jpg',
-        'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/5d6034a85edf8db18e821f720a23dd54564e7473.jpg',
-        'https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/5d6034a85edf8db18e821f720a23dd54564e7473.jpg'
     ];
 
     totalCount = 0;
@@ -157,12 +157,23 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
                 console.error(error);
             }
         );
+        this.documentService.getBanner().subscribe(
+            (result: any) => {
+                const { code, data, message } = result;
+                if (code === 1) {
+                    this.images = data;
+                }
+            },
+            error => {
+                console.error(error);
+            }
+        );
         this.documentService.getAllTags().subscribe(
             (result: any) => {
                 const { code, data, message } = result;
                 if (code === 1) {
-                    this.tags = data;
-                    this.tagId = data[0].id;
+                    this.tags = _.filter(data,function(v){return v.status === 1});
+                    this.tagId = this.tags[0].id;
                     // window.localStorage.setItem('ngx_documentsCategory', JSON.stringify(data.content));
                     // if (this.categoryId) {
                     //   this.onFilterCategory({id: this.categoryId});

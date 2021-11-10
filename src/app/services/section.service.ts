@@ -23,4 +23,20 @@ export class SectionService {
     );
   }
 
+  focus(sectionId) {
+    return this.http.post(`${environment.apiPrefix}/bbs/bbsSectionFocus/focus`, {sectionId: parseInt(sectionId)}).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
+  unFocus(sectionId) {
+    return this.http.post(`${environment.apiPrefix}/bbs/bbsSectionFocus/unFocus`, {sectionId: parseInt(sectionId)}).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }

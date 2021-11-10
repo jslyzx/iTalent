@@ -5,7 +5,7 @@
                 <!-- 容器（必选） -->
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" *ngFor="let i of images">
-                        <img src="{{ i }}" />
+                        <img [src]="staticPath + i.bannerImg" />
                     </div>
                 </div>
                 <!-- 分页（可选） -->
@@ -18,10 +18,9 @@
     </div>
     <div class="content clearfix">
         <div class="item" *ngFor="let channel of channels" (click)="toSection(channel.id)">
-            <img src="./assets/images/my-banner.jpg" alt="">
+            <img [src]="staticPath + channel.sectionImg" alt="">
             <div class="front">
-                <i class="iconfont icon-ruanjian"></i>
-                <span class="title">{{channel.sectionName}}</span>
+                {{channel.sectionName}}
             </div>
         </div>
     </div>

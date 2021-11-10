@@ -3,6 +3,10 @@
 
     padding: 20px;
 
+    .title::-webkit-input-placeholder{
+        fontsize: 25px;
+    }
+
     .ope button {
         border: none;
         color: #fff;
@@ -30,9 +34,14 @@
         padding-left: 0;
     }
 
+    .content::-webkit-input-placeholder{
+        font-size: 16px;
+    }
+
     .content {
         border: none;
         min-height: 300px;
+        padding: 0 5px;
     }
 
     .mint-checkbox-core {

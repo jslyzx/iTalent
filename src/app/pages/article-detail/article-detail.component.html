@@ -15,6 +15,11 @@
                 </div>
             </div>
             <div class="content" [innerHTML]="article.articleContent"></div>
+            <div class="imgs">
+                <div class="img" *ngFor="let img of articleImgList">
+                    <img [src]="staticPath + img.imgUrl" alt="" style="max-width: 100%;max-height: 200px;">
+                </div>
+            </div>
             <div class="comments">
                 <div class="comment clearfix" *ngFor="let comment of articleCommentList">
                     <img src="assets/images/avatar.jpg" class="avator fl">
@@ -59,7 +64,7 @@
             <span class="mui-tab-label"><i class="iconfont icon-pinglun"></i>评论</span>
             <span class="split"></span>
         </a>
-        <a class="mui-tab-item" (click)="toggleForward(article.id)" [ngClass]="{'active': isForward}">
+        <a class="mui-tab-item" (click)="toggleForward(article.id)">
             <span class="mui-tab-label"><i class="iconfont icon-zhuanfa"></i>转发</span>
             <span class="split"></span>
         </a>

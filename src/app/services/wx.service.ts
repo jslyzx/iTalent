@@ -52,7 +52,7 @@ export class WXService {
             return;
           }
           // jsApiList: ['onHistoryBack']
-          ret.jsApiList = ['hideAllNonBaseMenuItem'];
+          ret.jsApiList = ['hideAllNonBaseMenuItem', 'onMenuShareTimeline'];
           ret.appId = ret.appid;
           // ret.beta = true;
           // ret.debug = true;

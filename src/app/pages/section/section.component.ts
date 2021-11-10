@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SectionService} from "../../services/section.service";
 import {DialogComponent, DialogConfig, DialogService, ToastComponent} from "ngx-weui";
 import {environment} from '../../../environments/environment';
+import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips';
+import { SkinType } from 'ngx-weui/core';
 
 @Component({
   selector: 'app-section',
@@ -17,6 +19,8 @@ export class SectionComponent extends BaseComponent implements OnInit {
   list = [];
 
   staticPath = environment.staticApiPrefix;
+
+  @ViewChild('success', { static: true }) successToast: ToastComponent;
 
   constructor(
     private sectionService: SectionService,
@@ -44,7 +48,7 @@ export class SectionComponent extends BaseComponent implements OnInit {
       (error: any) => {
         console.log(error);
       }
-    )
+    );
   }
 
   toPost(){
@@ -53,6 +57,20 @@ export class SectionComponent extends BaseComponent implements OnInit {
 
   toDetail(articleId){
     this.router.navigate([`/app/article/${articleId}`]);
+  }
+
+  notice(){
+    this.sectionService.focus(parseInt(this.sectionId)).subscribe(
+      (result: any) => {
+        const {code, data, message} = result;
+        if (code === 1) {
+          this.successToast.onShow();
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
 }
