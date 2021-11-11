@@ -5,15 +5,15 @@
 
 # Set variables once
 variables:
-  imageTag: 'cr-p-001-registry.cn-hangzhou.cr.aliyuncs.com/dev/hrupdate-$(Build.SourceBranchName):$(Build.BuildNumber)'
-  label: hrupdate-$(Build.SourceBranchName)
+  imageTag: 'cr-p-001-registry.cn-hangzhou.cr.aliyuncs.com/dev/icommunity-$(Build.SourceBranchName):$(Build.BuildNumber)'
+  label: icommunity-$(Build.SourceBranchName)
   repos: dev
   namespace: hr-update
   npm_config_cache: $(Pipeline.Workspace)/.npm
   YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
 
 trigger:
-  - landing
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -24,7 +24,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        sed -i 's/@image@/hrupdate-$(Build.SourceBranchName):$(Build.BuildNumber)/g;s/@repos@/$(repos)/g;s/@namespace@/$(namespace)/g;s/@label@/$(label)/g' deployment.yaml
+        sed -i 's/@image@/icommunity-$(Build.SourceBranchName):$(Build.BuildNumber)/g;s/@repos@/$(repos)/g;s/@namespace@/$(namespace)/g;s/@label@/$(label)/g' deployment.yaml
       workingDirectory: './'
 
   - task: Bash@3
@@ -36,9 +36,9 @@ steps:
 
   - task: CacheBeta@0
     inputs:
-      key: npm | $(Agent.OS) | package-lock.json
-      path: $(npm_config_cache)
-    displayName: Cache npm
+      key: yarn | $(Agent.OS) | yarn.lock
+      path: $(YARN_CACHE_FOLDER)
+    displayName: Cache yarn
 
   - task: NodeTool@0
     inputs:
@@ -46,9 +46,9 @@ steps:
     displayName: 'Install Node.js'
 
   - script: |
-      npm ci
-      npm run build
-    displayName: 'npm ci and build'
+      yarn add
+      yarn run build
+    displayName: 'yarn add and build'
 
   - task: Docker@0
     displayName: 'Build an image'
