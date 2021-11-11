@@ -39,4 +39,12 @@ export class SectionService {
     );
   }
 
+  getMyFocus() {
+    return this.http.post(`${environment.apiPrefix}/bbs/bbsSectionFocus/getMyList`, null).pipe(
+      map((result: any) => {
+        return result;
+      }),
+    );
+  }
+
 }

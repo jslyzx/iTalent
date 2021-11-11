@@ -92,4 +92,8 @@ export class AuthService {
       }),
     );
   }
+
+  setToken(token) {
+    this.authToken = token;
+  }
 }

@@ -33,9 +33,8 @@ export class AuthInterceptor implements HttpInterceptor {
             Authorization: `Bearer ${this.auth.authToken}`,
           },
         });
-    }
-    if (!environment.production) {
-      request = request.clone(
+    }else{
+        request = request.clone(
         {
           setHeaders: {
             // tslint:disable-next-line:max-line-length

@@ -1,6 +1,7 @@
 <div class="mine">
     <div class="head clearfix">
-        <img [src]="userInfo.avatar" alt="" class="avatar fl">
+        <!-- <img [src]="userInfo.avatar" alt="" class="avatar fl"> -->
+        <embed src="assets/images/avator.svg" class="avatar fl" />
         <div class="fl">
             <p class="name">{{personalData.chineseName}}</p>
             <p class="sign">这个人很懒，什么都没写</p>
@@ -47,23 +48,23 @@
         <div class="title">关于我的</div>
         <div class="wrap">
             <div class="item">
-                <i class="iconfont icon-at"></i>
+                <i class="iconfont icon-at" (click)="waitFuture()"></i>
                 <p>关联我的</p>
             </div>
             <div class="item">
-                <i class="iconfont icon-pinglunwode"></i>
+                <i class="iconfont icon-pinglunwode" (click)="waitFuture()"></i>
                 <p>评论我的</p>
             </div>
             <div class="item">
-                <i class="iconfont icon-dianzanwode"></i>
+                <i class="iconfont icon-dianzanwode" (click)="waitFuture()"></i>
                 <p>点赞我的</p>
             </div>
             <div class="item">
-                <i class="iconfont icon-zhuanfawode"></i>
+                <i class="iconfont icon-zhuanfawode" (click)="waitFuture()"></i>
                 <p>转发我的</p>
             </div>
             <div class="item">
-                <i class="iconfont icon-shoucangwode"></i>
+                <i class="iconfont icon-shoucangwode" (click)="waitFuture()"></i>
                 <p>收藏我的</p>
             </div>
         </div>

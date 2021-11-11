@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../base.component';
-import { DocumentService } from '../../services/document.service';
+import { SectionService } from '../../services/section.service';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -21,7 +21,7 @@ export class MyFocusComponent extends BaseComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private documentService: DocumentService,
+        private sectionService: SectionService,
         private route: ActivatedRoute
     ) {
         super();
@@ -32,7 +32,7 @@ export class MyFocusComponent extends BaseComponent implements OnInit {
     }
 
     private initData() {
-        this.documentService.getChannelByTag(1).subscribe(
+        this.sectionService.getMyFocus().subscribe(
             (result: any) => {
                 const { code, data, message } = result;
                 if (code === 1) {

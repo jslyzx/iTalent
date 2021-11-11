@@ -36,7 +36,6 @@ export class LoginGuard implements CanActivate {
     // // this.router.navigate(['/pages/login']);
     // window.location.href = environment.loginUrl;
     // return false;
-
     const currentUrl = window.location.href;
     const currentUrlVars: any = utils.getUrlVars(currentUrl);
     if (currentUrlVars && currentUrlVars.code) {

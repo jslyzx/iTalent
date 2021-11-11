@@ -21,7 +21,7 @@ export class SectionComponent extends BaseComponent implements OnInit {
 
   staticPath = environment.staticApiPrefix;
 
-  moduleId;
+  moduleId = '';
 
   menus = [];
 

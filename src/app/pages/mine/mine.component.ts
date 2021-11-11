@@ -67,4 +67,8 @@ export class MineComponent extends BaseComponent implements OnInit {
         this.router.navigate([`/app/my/focus`]);
     }
 
+    waitFuture(){
+        alert('开发中，敬请期待！')
+    }
+
 }

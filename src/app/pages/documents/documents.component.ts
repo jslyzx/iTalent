@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { timer } from 'rxjs';
+import {LocalStorage} from 'ngx-store';
 import {
     InfiniteLoaderComponent,
     InfiniteLoaderConfig,
@@ -15,7 +16,6 @@ import { DocumentService } from '../../services/document.service';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { LocalStorage } from 'ngx-store';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from "../../services/auth.service";
 import { MatTabGroup } from "@angular/material/tabs";
@@ -34,12 +34,7 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
     loading = false;
 
     @LocalStorage()
-    lang;
-
-    @LocalStorage()
-    documentsCategory;
-
-    documentsCategoryTags: any;
+    authToken: any;
 
     @LocalStorage()
     userInfo: any;
@@ -99,6 +94,9 @@ export class DocumentsComponent extends BaseComponent implements OnInit {
         private toastService: ToastService,
     ) {
         super();
+        this.route.queryParams.subscribe(param => {
+          localStorage.setItem('ngx_authToken', param.token);
+        });
     }
 
     ngOnInit(): void {

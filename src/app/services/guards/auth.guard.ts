@@ -19,6 +19,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    localStorage.setItem('ngx_authToken', next.queryParams.token);
     this.preUrl = window.location.href;
     return true;
   }
