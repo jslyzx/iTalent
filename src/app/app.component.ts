@@ -17,6 +17,7 @@ import {WXService} from './services/wx.service';
 
 declare var navigator: any;
 declare var wx: any;
+declare var tinyMCE: any;
 
 @Component({
   selector: 'app-root',

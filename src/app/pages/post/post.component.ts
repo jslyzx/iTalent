@@ -13,6 +13,8 @@ import { Uploader, UploaderOptions } from 'ngx-weui/uploader';
 import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips';
 import { environment } from '../../../environments/environment';
 
+declare var tinyMCE: any;
+
 @Component({
     selector: 'app-post',
     templateUrl: './post.component.html',
@@ -40,8 +42,6 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     apiPath = environment.apiPrefix;
 
     accessToken = environment.accessToken;
-
-    emoji = [{id: 1, emoji: '😁'},{id: 2, emoji: '😂'},{id: 3, emoji: '😃'},{id: 4, emoji: '😄'},{id: 5, emoji: '👿'},{id: 6, emoji: '😉'},{id: 7, emoji: '😊'},{id: 8, emoji: '😌'},{id: 9, emoji: '😍'},{id: 10, emoji: '😏'},{id: 11, emoji: '😒'},{id: 12, emoji: '😓'},{id: 13, emoji: '😔'},{id: 14, emoji: '😖'},{id: 15, emoji: '😘'},{id: 16, emoji: '😚'},{id: 17, emoji: '😜'},{id: 18, emoji: '😝'},{id: 19, emoji: '😞'},{id: 20, emoji: '😠'},{id: 21, emoji: '😡'},{id: 22, emoji: '😢'},{id: 23, emoji: '😣'},{id: 24, emoji: '😥'},{id: 25, emoji: '😨'},{id: 26, emoji: '😪'},{id: 27, emoji: '😭'},{id: 28, emoji: '😰'},{id: 29, emoji: '😱'},{id: 30, emoji: '😲'},{id: 31, emoji: '😳'},{id: 32, emoji: '😷'},{id: 33, emoji: '🙃'},{id: 34, emoji: '😋'},{id: 35, emoji: '😗'},{id: 36, emoji: '😛'},{id: 37, emoji: '🤑'},{id: 38, emoji: '🤓'},{id: 39, emoji: '😎'},{id: 40, emoji: '🤗'},{id: 41, emoji: '🙄'},{id: 42, emoji: '🤔'},{id: 43, emoji: '😩'},{id: 44, emoji: '😤'},{id: 45, emoji: '🤐'},{id: 46, emoji: '🤒'}];
 
     text = '';
 
@@ -85,22 +85,7 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.postService.getModuleList().subscribe(
-            (result: any) => {
-                const { code, data, message } = result;
-                if (code == 1) {
-                    this.menus = _.map(data,function(v){
-                        return {
-                            text: v.name,
-                            value: v.id
-                        }
-                    })
-                }
-            },
-            error => {
-                console.error(error);
-            }
-        );
+
     }
 
     ngOnDestroy(): void {
@@ -231,6 +216,9 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     submit() {
+        var con = tinyMCE.activeEditor.getContent();
+        alert(con);
+        return false;
         console.log(this.uploader.queue);
         if (!this.uploader.isUploading) {
             if (!this.title) {
@@ -242,7 +230,7 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
                 this.toptips.onShow();
                 return false;
             }
-            if (!this.content) {
+            if (!con) {
                 this.text = '请输入内容！';
                 this.type = 'warn';
                 this.toptips.onShow();
@@ -251,7 +239,7 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
             const self = this;
             this.postService.postArticle({
                 articleTitle: this.title,
-                articleContent: this.content,
+                articleContent: con,
                 articleImgs: _.map(this.uploader.options.params.picList, function(v) { return v.url }).join(),
                 coverImg: this.uploaderCover.options.params.picList.url,
                 sectionId: this.sectionId,
@@ -322,14 +310,6 @@ export class PostComponent extends BaseComponent implements OnInit, OnDestroy {
             this.remindUser.push(user);
         }
         this.chooseUser = false;
-    }
-
-    addemoji(emoji){
-      this.content = this.content + emoji
-    }
-
-    toggleEmoji(){
-        this.isshow = !this.isshow;
     }
 
 }

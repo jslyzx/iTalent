@@ -23,6 +23,7 @@ import { ArticleDetailComponent } from "./pages/article-detail/article-detail.co
 import { MineComponent } from "./pages/mine/mine.component";
 import { ArticleListComponent } from "./pages/article-list/article-list.component";
 import { MyFocusComponent } from "./pages/my-focus/my-focus.component";
+import { EditorModule,TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -72,6 +73,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     FormsModule,
     MatSliderModule,
     MatTabsModule,
+    EditorModule
   ],
   providers: [
     {
@@ -82,6 +84,9 @@ export class MyHammerConfig extends HammerGestureConfig {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
+    },
+    { provide: TINYMCE_SCRIPT_SRC,
+      useValue: 'tinymce/tinymce.min.js' 
     }
   ],
   bootstrap: [AppComponent]

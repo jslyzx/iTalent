@@ -23,6 +23,7 @@
     "@angular/router": "~10.2.3",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
+    "@tinymce/tinymce-angular": "^4.2.4",
     "@types/swiper": "^5.4.3",
     "and": "^0.0.3",
     "base-64": "^0.1.0",
@@ -37,6 +38,7 @@
     "ngx-weui": "^10.0.2",
     "rxjs": "~6.5.4",
     "swiper": "3.4.2",
+    "tinymce": "^5.10.2",
     "tslib": "^2.0.0",
     "watermarkjs": "^2.1.1",
     "zone.js": "~0.10.2"
